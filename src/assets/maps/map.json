@@ -1,0 +1,45 @@
+{ "compressionlevel":-1,
+ "height":10,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[105, 106, 106, 106, 106, 106, 106, 106, 106, 107,
+            113, 10, 10, 11, 12, 20, 13, 14, 15, 115,
+            113, 18, 21, 22, 61, 62, 21, 22, 23, 115,
+            113, 26, 29, 30, 49, 50, 37, 38, 39, 115,
+            113, 22, 21, 22, 33, 34, 45, 46, 47, 115,
+            113, 30, 29, 30, 41, 42, 17, 18, 19, 115,
+            113, 4, 7, 8, 33, 34, 25, 26, 27, 115,
+            113, 12, 15, 16, 41, 42, 29, 30, 31, 115,
+            113, 20, 23, 24, 49, 50, 8, 14, 15, 115,
+            121, 122, 122, 122, 122, 122, 122, 122, 122, 123],
+         "height":10,
+         "id":1,
+         "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":2,
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.8.5",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":"..\/tiles\/TX Tileset Grass.tsx"
+        }, 
+        {
+         "firstgid":65,
+         "source":"..\/tiles\/TX Tileset Stone Ground.tsx"
+        }],
+ "tilewidth":32,
+ "type":"map",
+ "version":"1.8",
+ "width":10
+}
