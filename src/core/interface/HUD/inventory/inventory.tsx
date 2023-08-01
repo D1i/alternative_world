@@ -41,7 +41,7 @@ function BagUnit({bag, width, height}: Props) {
         })
     }, [width, height, cellWidth]);
 
-    const items = useMemo(() => inner.map((item) => {
+    const items: Array<JSX.Element> = useMemo(() => inner.map((item) => {
         const cellStyles: CSSProperties = {
             position: 'absolute',
             left: `${cellWidth * item.x}px`,
@@ -65,8 +65,10 @@ function BagUnit({bag, width, height}: Props) {
         if (!container?.current) {
             return;
         }
-        const x = event["pageX"] - container.current["offsetLeft"];
-        const y = event["pageY"] - container.current["offsetTop"];
+        // @ts-ignore
+        const x = event["pageX"] - container.current.getBoundingClientRect().left;
+        // @ts-ignore
+        const y = event["pageY"] - container.current.getBoundingClientRect().top;
         const position = utils.getCellPosition(cellWidth, cellHeight, x, y);
         const target = utils.checkItemOnPosition(inner, position?.x, position?.y);
         setRelativeShiftPoint({
@@ -80,8 +82,10 @@ function BagUnit({bag, width, height}: Props) {
         if (!container?.current || !relativeShiftPoint) {
             return;
         }
-        const x = event["pageX"] - container.current["offsetLeft"];
-        const y = event["pageY"] - container.current["offsetTop"];
+        // @ts-ignore
+        const x = event["pageX"] - container.current.getBoundingClientRect().left;
+        // @ts-ignore
+        const y = event["pageY"] - container.current.getBoundingClientRect().top;
         const position = utils.getCellPosition(cellWidth, cellHeight, x, y);
         const xPosition = position.x - relativeShiftPoint.x;
         const yPosition = position.y - relativeShiftPoint.y;
@@ -115,9 +119,10 @@ function BagUnit({bag, width, height}: Props) {
             if (!container?.current) {
                 return;
             }
-            const x = event["pageX"] - container.current["offsetLeft"];
-            const y = event["pageY"] - container.current["offsetTop"];
-            console.log(spectatorCloneItemElement?.current)
+            // @ts-ignore
+            const x = event["pageX"] - container.current.getBoundingClientRect().left;
+            // @ts-ignore
+            const y = event["pageY"] - container.current.getBoundingClientRect().top;
             if (!spectatorCloneItemElement) {
                 return;
             }
@@ -164,14 +169,10 @@ function BagUnit({bag, width, height}: Props) {
 
 function Inventory({bag, width, height}: Props): JSX.Element {
     return (
-        <div
-            className={s.container}
-            style={{width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-        >
+        <div className={s.container}>
             <BagUnit bag={bag} width={width} height={height}/>
         </div>)
 }
-
 
 
 export {Inventory}
