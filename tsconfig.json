@@ -1,0 +1,12 @@
+{
+  "allowImportingTsExtension": false,
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@store-redux/*": [
+        "./redux/*"
+      ]
+    }
+  }
+}
