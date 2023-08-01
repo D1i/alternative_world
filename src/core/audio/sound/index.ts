@@ -1,0 +1,1 @@
+export {playSound} from './sound';

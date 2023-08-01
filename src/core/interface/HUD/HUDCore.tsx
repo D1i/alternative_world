@@ -5,6 +5,7 @@ import {Inventory} from "./inventory";
 import {useMemo} from "react";
 import {Bags} from "./bags";
 import {ShiftContainer} from "./shift-container";
+import {playSound} from "../../audio";
 
 function HUDCore(): JSX.Element {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
@@ -15,7 +16,8 @@ function HUDCore(): JSX.Element {
             <div>
                 {selectedCoreStateSelector.interface.HUD.openedBags.map((bag) => {
                     function handleClose() {
-                        dispatch(closeBag(bag))
+                        dispatch(closeBag(bag));
+                        playSound(2);
                     }
 
                     return (

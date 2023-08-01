@@ -12,6 +12,9 @@ export interface CoreState {
             inventory: Array<Bag>,
             openedBags: Array<Bag>
         }
+    },
+    settings: {
+        volme: number
     }
 }
 
@@ -39,6 +42,9 @@ const initialState: CoreState = {
             ],
             openedBags: []
         }
+    },
+    settings: {
+        volme: 100
     }
 }
 export const coreStateSlice = createSlice({
@@ -56,6 +62,16 @@ export const coreStateSlice = createSlice({
         },
         closeBag: (state, action) => {
             state.interface.HUD.openedBags = state.interface.HUD.openedBags.filter((bag) => bag.code !== action.payload.code);
+        },
+        moveItem: (state, action) => {
+            state.interface.HUD.inventory
+                .find(bag => bag.code === action.payload.code)
+                .inner = action.payload;
+        },
+        moveItemBetweenBags: (state, action) => {
+        },
+        setVolme: (state, action) => {
+            state.settings.volme = action.payload;
         }
     },
 });
@@ -64,6 +80,8 @@ export const {
     closeMainMenu,
     openBag,
     closeBag,
+    moveItem,
+    setVolme,
 } =
     coreStateSlice.actions;
 export const coreStateSelector = (state: RootState) => state.coreStateReducer;

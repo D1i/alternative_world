@@ -1,7 +1,10 @@
-import {CSSProperties, MouseEvent, MouseEventHandler, useCallback, useMemo, useRef, useState} from "react";
+import {CSSProperties, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {cloneDeep, isEqual} from "lodash";
 
 import {utils} from './utils';
+
+import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
+import {coreStateSelector, moveItem} from "../../../../redux/slicer";
 
 // @ts-ignore
 import wood from './wood.png';
@@ -12,6 +15,7 @@ import {Bag} from "../../../types/interfaceCore";
 
 import s from './style.module.scss';
 
+
 type Props = {
     bag: Bag,
     width: number,
@@ -19,6 +23,9 @@ type Props = {
 }
 
 function BagUnit({bag, width, height}: Props) {
+    const selectedCoreStateSelector = useAppSelector(coreStateSelector);
+    const dispatch = useAppDispatch();
+
     const [inner, setInner] = useState(cloneDeep(bag.inner));
     const [currentBufferedItem, setCurrentBufferedItem] = useState(null);
     const [relativeShiftPoint, setRelativeShiftPoint] = useState(null);
@@ -30,6 +37,10 @@ function BagUnit({bag, width, height}: Props) {
 
     const container = useRef();
     const spectatorCloneItemElement = useRef();
+
+    // useEffect(() => {
+    //     dispatch(moveItem(inner));
+    // }, [dispatch, inner])
 
     const styles: CSSProperties = useMemo(() => {
         return ({
@@ -109,7 +120,7 @@ function BagUnit({bag, width, height}: Props) {
             setCurrentBufferedItem(null);
             setSpectatorCloneItem(null);
         }
-    }, [relativeShiftPoint, cellWidth, cellHeight, currentBufferedItem, inner, bag.x, bag.y]);
+    }, [relativeShiftPoint, cellWidth, cellHeight, currentBufferedItem, inner, bag.x, bag.y, dispatch]);
 
     const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>): void => {
         if (!currentBufferedItem || !currentBufferedItem || !relativeShiftPoint) {
