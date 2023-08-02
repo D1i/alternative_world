@@ -1,0 +1,13 @@
+.botRow {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  .speed {
+    display: flex;
+    div {
+      width: 400px;
+    }
+  }
+}
