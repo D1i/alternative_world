@@ -4,20 +4,24 @@ import {cloneDeep, isEqual} from "lodash";
 import {utils} from './utils';
 
 import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
-import {coreStateSelector, moveItem} from "../../../../redux/slicer";
+import {coreStateSelector, moveItem, setBufferItem} from "../../../../redux/HUDReducer";
 
 // @ts-ignore
 import wood from './wood.png';
 // @ts-ignore
+import stick from './stick.png';
+// @ts-ignore
 import cellBackground from './inventory-cell.png';
 
-import {Bag} from "../../../types/interfaceCore";
+import { HUDTypes } from "src/types";
 
 import s from './style.module.scss';
+import {Simulate} from "react-dom/test-utils";
+import mouseUp = Simulate.mouseUp;
 
 
 type Props = {
-    bag: Bag,
+    bag: HUDTypes.Bag,
     width: number,
     height: number
 }
@@ -60,14 +64,24 @@ function BagUnit({bag, width, height}: Props) {
             width: `${cellWidth * item.width}px`,
             height: `${cellHeight * item.height}px`,
             cursor: 'pointer',
-            backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+            // backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
         }
+
+        if (item?.id === 0) {
+            cellStyles.backgroundImage = `url("${wood}")`;
+            cellStyles.backgroundSize = 'cover';
+            cellStyles.backgroundColor = 'none';
+        } else if (item?.id === 1) {
+            cellStyles.backgroundImage = `url("${stick}")`;
+            cellStyles.backgroundSize = 'cover';
+            cellStyles.backgroundColor = 'none';
+        }
+
         return (
             <div
                 key={`item-${item.id}-${item.x}-${item.y}`}
                 style={cellStyles}
             >
-                {item.name}
             </div>
         )
     }), [inner, cellWidth, cellHeight]);
@@ -93,6 +107,7 @@ function BagUnit({bag, width, height}: Props) {
         if (!container?.current || !relativeShiftPoint) {
             return;
         }
+        console.log('mouseUp')
         // @ts-ignore
         const x = event["pageX"] - container.current.getBoundingClientRect().left;
         // @ts-ignore
@@ -115,12 +130,17 @@ function BagUnit({bag, width, height}: Props) {
                 return item;
             })
 
+            if (!newInner.find((item) => item.code === currentBufferedItem.code)) {
+                newInner.push(currentBufferedItem)
+            }
+            console.log(currentBufferedItem)
+            console.log(newInner)
             setInner(newInner);
 
             setCurrentBufferedItem(null);
             setSpectatorCloneItem(null);
         }
-    }, [relativeShiftPoint, cellWidth, cellHeight, currentBufferedItem, inner, bag.x, bag.y, dispatch]);
+    }, [relativeShiftPoint, cellWidth, cellHeight, currentBufferedItem, inner, bag.x, bag.y, dispatch, selectedCoreStateSelector]);
 
     const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>): void => {
         if (!currentBufferedItem || !currentBufferedItem || !relativeShiftPoint) {
@@ -149,27 +169,53 @@ function BagUnit({bag, width, height}: Props) {
                 width: `${cellWidth * currentBufferedItem.width}px`,
                 height: `${cellHeight * currentBufferedItem.height}px`,
                 cursor: 'pointer',
-                backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
+                // backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`,
                 zIndex: 1,
                 opacity: 0.5,
+            }
+            console.log(currentBufferedItem)
+            if (currentBufferedItem.id === 0) {
+                cellStyles.backgroundImage = `url("${wood}")`;
+                cellStyles.backgroundSize = 'cover';
+                cellStyles.backgroundColor = 'none';
+            } else if (currentBufferedItem.id === 1) {
+                cellStyles.backgroundImage = `url("${stick}")`;
+                cellStyles.backgroundSize = 'cover';
+                cellStyles.backgroundColor = 'none';
             }
             setSpectatorCloneItem(
                 <div
                     ref={spectatorCloneItemElement}
                     key={`item-${currentBufferedItem.id}-${currentBufferedItem.x}-${currentBufferedItem.y}`}
                     style={cellStyles}>
-                    {currentBufferedItem.name}
                 </div>
             )
         }
 
     }, [currentBufferedItem, relativeShiftPoint, spectatorCloneItem, cellWidth, cellHeight]);
 
+    const handleMouseLeave = useCallback(() => {
+        console.log('leave')
+        console.log(currentBufferedItem)
+        dispatch(setBufferItem(currentBufferedItem));
+        setCurrentBufferedItem(null);
+    }, [dispatch, currentBufferedItem, setCurrentBufferedItem])
+
+    const handleMouseEnter = useCallback(() => {
+        console.log(selectedCoreStateSelector.interface.HUD.bufferItem)
+        console.log('enter')
+        setCurrentBufferedItem(selectedCoreStateSelector.interface.HUD.bufferItem);
+        dispatch(setBufferItem(null));
+    }, [dispatch, currentBufferedItem, setCurrentBufferedItem, selectedCoreStateSelector])
+    // console.log(currentBufferedItem)
+
     return (<div
         style={styles}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleMouseEnter}
         ref={container}
     >
         {spectatorCloneItem}

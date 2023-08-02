@@ -4,27 +4,25 @@ import {Button} from "@mui/material";
 import {InterfaceCore} from "./core";
 
 import {playSound} from "./core/audio";
+import utils from "./utils";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
+import {addBag, coreStateSelector} from "./redux/HUDReducer";
+
+import s from './style.scss';
+import {InitScreen} from "./core/interface/menu/init-screen";
 
 function Game() {
-    const [initedProcess, setInitedProcess] = useState(false);
-    const handleInitGameProcesses = useCallback(() => {
-        setInitedProcess(true);
-        playSound(3);
+    const selectedCoreStateSelector = useAppSelector(coreStateSelector);
 
-    }, [])
-
-    if (initedProcess) {
-        return (
-            <div>
-                {/*<AudioCore />
+    return (
+        <div>
+            {/*<AudioCore />
             <InterfaceCore />
             <MovementCore />*/}
-                <InterfaceCore/>
-            </div>
-        )
-    } else {
-        return <Button variant="contained" onClick={handleInitGameProcesses}>КЛИКНИТЕ ДЛЯ ИНИЦИАЛИЗАЦИИ ИГРЫ</Button>
-    }
+            {!selectedCoreStateSelector.interface.HUD.initedProcess && <InitScreen/>}
+            <InterfaceCore/>
+        </div>
+    )
 }
 
 export {Game};

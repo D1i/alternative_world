@@ -1,11 +1,12 @@
 import {useCallback, useState} from "react";
 import {Button} from "@mui/material";
 
-import {closeMainMenu, coreStateSelector} from "../../../../redux/slicer";
+import {closeMainMenu, coreStateSelector} from "../../../../redux/HUDReducer";
 import {useAppSelector, useAppDispatch} from "../../../../redux/hooks";
 
-import s from "./style.scss"
 import {Settings} from "./settings";
+
+import s from "./style.scss"
 
 const POSITIONS = {
     MENU: 'menu',
@@ -29,12 +30,16 @@ function MainMenu() {
         setCurrentPosition(POSITIONS.SETTINGS);
     }, []);
 
+    const handleExit = useCallback(() => {
+        window.close();
+    }, [])
+
     if (currentPosition === POSITIONS.MENU) {
         return (
             <div className={s.menuContainer}>
                 <Button onClick={handleStart}>Начать</Button>
                 <Button onClick={handleOpenSettings}>Настройки</Button>
-                <Button>Выход</Button>
+                <Button onClick={handleExit}>Выход</Button>
             </div>
         )
     } else if (currentPosition === POSITIONS.SETTINGS) {

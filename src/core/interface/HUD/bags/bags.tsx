@@ -1,7 +1,7 @@
 import {ReactNode, useCallback, useEffect, useMemo} from "react";
 
 import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
-import {closeBag, closeMainMenu, coreStateSelector, openBag} from "../../../../redux/slicer";
+import {closeBag, closeMainMenu, coreStateSelector, openBag} from "../../../../redux/HUDReducer";
 
 import {playSound} from "../../../audio";
 

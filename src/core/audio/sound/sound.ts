@@ -7,7 +7,7 @@ export function playSound(id: number) {
     const audio = new Audio(sounds[id]);
     audio.play();
     if (id === 3) {
-        audio.volume = 0.5;
+        audio.volume = 0.0;
     }
 
     currentSoundTrack.push(audio);

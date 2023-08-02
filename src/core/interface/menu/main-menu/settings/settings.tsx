@@ -2,14 +2,13 @@ import {useCallback} from "react";
 import {Button, Container, Slider, Stack} from "@mui/material";
 
 import {useAppDispatch, useAppSelector} from "../../../../../redux/hooks";
-import {coreStateSelector, setVolme} from "../../../../../redux/slicer";
+import {coreStateSelector, setVolme} from "../../../../../redux/HUDReducer";
 
 function Settings(props) {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
     const dispatch = useAppDispatch();
 
     const handleChangeVolme = useCallback((event) => {
-        // console.log(event.target.value)
         dispatch(setVolme(event.target.value));
     }, [dispatch]);
 

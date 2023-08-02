@@ -5,7 +5,7 @@ import {Provider} from 'react-redux/es/exports'
 import {Game} from './game.tsx';
 import {store} from "./redux/store";
 
-import './index.css';
+import './style.scss';
 
 
 const root = createRoot(document.getElementById('root'));

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import coreStateReducer from './slicer';
+import coreStateReducer from './HUDReducer';
 export const store = configureStore({
     reducer: {
         coreStateReducer
