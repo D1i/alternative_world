@@ -18,7 +18,7 @@ function Game() {
       <div>
         {/* <AudioCore />
             <InterfaceCore /> */}
-        <MovementCore />
+        <MovementCore visibilityMode={true} />
         {/* <InterfaceCore/> */}
       </div>
     );

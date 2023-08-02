@@ -14,6 +14,8 @@ const MoveBtns: FC<props> = (props) => {
   const [moveKeysStack, setMoveKeysStack] = useState<keyVector>([]);
 
   function handleMoveKeyDown(event) {
+    console.log('dsadasasda');
+
     if (!moveKeysStack.includes(event.code) && moveKeys.includes(event.code)) {
       setMoveKeysStack([...moveKeysStack, event.code]);
     }
@@ -26,7 +28,15 @@ const MoveBtns: FC<props> = (props) => {
   }
 
   return (
-    <div tabIndex={0} onKeyDown={handleMoveKeyDown} onKeyUp={handleMoveKeyUp}>
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+      }}
+      tabIndex={0}
+      onKeyDown={handleMoveKeyDown}
+      onKeyUp={handleMoveKeyUp}
+    >
       <MoveContext.Provider value={moveKeysStack}>
         {props.children}
       </MoveContext.Provider>

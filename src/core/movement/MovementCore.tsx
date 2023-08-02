@@ -1,10 +1,14 @@
 import { Moving } from './Moving';
 import { MoveBtns } from './move-btns';
 
-function MovementCore() {
+interface props {
+  visibilityMode?: boolean;
+}
+
+function MovementCore(props: props) {
   return (
     <MoveBtns>
-      <Moving />
+      <Moving visibilityMode={props.visibilityMode} />
     </MoveBtns>
   );
 }

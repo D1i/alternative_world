@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { FC } from 'react';
 import s from './Moving.module.scss';
 import { useMoveBtns } from '../hooks';
@@ -15,7 +15,11 @@ import {
 } from './utils';
 import { BotRow, MidRow, TopRow } from './components';
 
-const Moving: FC = () => {
+interface props {
+  visibilityMode: boolean;
+}
+
+const Moving: FC<props> = (props) => {
   const [player, setPlayer] = useState<playerTest>(currentPlayer);
   const [mouse, setMouse] = useState<mouseTest>(currentMouse);
   const moveKeysStack: keyVector = useMoveBtns();
@@ -35,14 +39,19 @@ const Moving: FC = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  const onMouseMoveHeandler = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    setMouse(() => setMousePosition(e, player));
-  };
+  const onMouseMoveHeandler = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      setMouse(() => setMousePosition(e, player));
+    },
+    []
+  );
 
   return (
-    <div onMouseMove={(e) => onMouseMoveHeandler(e)} className={s.movingCore}>
+    <div
+      style={{ display: props.visibilityMode ? 'flex' : 'none' }}
+      onMouseMove={(e) => onMouseMoveHeandler(e)}
+      className={s.movingCore}
+    >
       <TopRow player={player} />
       <MidRow player={player} mouse={mouse} />
       <BotRow player={player} />
