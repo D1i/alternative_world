@@ -1,16 +1,16 @@
-import {sounds} from './sounds'
-
+import { sounds } from './sounds';
 
 const currentSoundTrack = [];
 
 export function playSound(id: number) {
-    const audio = new Audio(sounds[id]);
-    audio.play();
-    if (id === 3) {
-        audio.volume = 0.5;
-    }
+  const audio = new Audio(sounds[id]);
+  audio.play();
+  if (id === 3) {
+    audio.volume = 0.5;
+    audio.loop = true;
+  }
 
-    currentSoundTrack.push(audio);
+  currentSoundTrack.push(audio);
 
-    return currentSoundTrack.length - 1;
+  return currentSoundTrack.length - 1;
 }
