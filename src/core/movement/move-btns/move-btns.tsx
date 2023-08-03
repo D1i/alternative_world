@@ -14,8 +14,6 @@ const MoveBtns: FC<props> = (props) => {
   const [moveKeysStack, setMoveKeysStack] = useState<keyVector>([]);
 
   function handleMoveKeyDown(event) {
-    console.log('dsadasasda');
-
     if (!moveKeysStack.includes(event.code) && moveKeys.includes(event.code)) {
       setMoveKeysStack([...moveKeysStack, event.code]);
     }
