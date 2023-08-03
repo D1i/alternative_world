@@ -13,19 +13,7 @@ import {codeGenerator} from "../../../utils/code-generator";
 import {HUDTypes} from "../../../types";
 import {DATA} from "../../../API";
 
-const PSEUDO_DATA = {
-    id: 0,
-    code: codeGenerator(),
-    type: HUDTypes.Types.ADMIN_PANEL,
-    hasShifting: false,
-    startX: 0,
-    startY: 0,
-    endX: 0,
-    endY: 0,
-    zIndex: 0,
-    specialData: {},
-    size: {width: 100, height: 100},
-}
+import s from './HUD-core-styles.module.scss';
 
 function HUDCore(): JSX.Element {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
@@ -57,8 +45,9 @@ function HUDCore(): JSX.Element {
     const HUDS: Array<HUDTypes.HUD> = useMemo(() => {
         return DATA.map(HUD => new HUDBuilder(HUD).calculatedCoordinates());
     }, []);
+
     return (
-        <div>
+        <div className={s.container}>
             <HUDLayout HUDS={HUDS}/>
             {/*<Bags/>*/}
             {/*{inventorys}*/}

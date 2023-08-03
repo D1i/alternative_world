@@ -1,12 +1,12 @@
 import {useCallback, useState} from "react";
 import {Button} from "@mui/material";
+import * as classNames from "classnames";
 
 import {useAppDispatch} from "../../../../redux/hooks";
 import {playSound} from "../../../audio";
 import {initProcess} from "../../../../redux/HUDReducer";
 
 import s from './style.module.scss';
-import * as classNames from "classnames";
 
 const F11: number = 122;
 

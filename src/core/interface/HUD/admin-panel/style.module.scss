@@ -1,5 +1,7 @@
 .container {
   width: 500px;
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
 }
 
 .mods {

@@ -16,9 +16,7 @@ function InterfaceCore() {
         )
     } else {
         return (
-            <div>
-                <HUDCore/>
-            </div>
+            <HUDCore/>
         )
     }
 }
