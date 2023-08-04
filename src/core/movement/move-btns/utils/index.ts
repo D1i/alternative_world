@@ -1,2 +1,2 @@
-export { moveKeys } from './constants';
-export { showVector } from './helpers';
+export { moveKeys } from './constants'
+export { showVector } from './helpers'

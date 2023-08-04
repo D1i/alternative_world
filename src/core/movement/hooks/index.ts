@@ -1,1 +1,1 @@
-export { useMoveBtns } from './useMoveBtns';
+export { useMoveBtns } from './useMoveBtns'

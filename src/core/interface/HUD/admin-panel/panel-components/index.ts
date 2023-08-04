@@ -1,1 +1,1 @@
-export {CreateItem} from './create-item';
+export { CreateItem } from './create-item'

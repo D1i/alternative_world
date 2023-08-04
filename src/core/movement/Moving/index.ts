@@ -1,1 +1,1 @@
-export { Moving } from './Moving';
+export { Moving } from './Moving'

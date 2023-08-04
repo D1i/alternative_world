@@ -1,1 +1,1 @@
-export {ShiftContainer} from './shift-container';
+export { ShiftContainer } from './shift-container'

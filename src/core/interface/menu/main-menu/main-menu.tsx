@@ -1,12 +1,12 @@
-import {useCallback, useState} from "react";
-import {Button} from "@mui/material";
+import { useCallback, useState } from 'react'
+import { Button } from '@mui/material'
 
-import {closeMainMenu, coreStateSelector} from "../../../../redux/HUDReducer";
-import {useAppSelector, useAppDispatch} from "../../../../redux/hooks";
+import { closeMainMenu, coreStateSelector } from '../../../../redux/HUDReducer'
+import { useAppSelector, useAppDispatch } from '../../../../redux/hooks'
 
-import {Settings} from "./settings";
+import { Settings } from './settings'
 
-import s from "./style.scss"
+import s from './style.scss'
 
 const POSITIONS = {
     MENU: 'menu',
@@ -14,28 +14,28 @@ const POSITIONS = {
 }
 
 function MainMenu() {
-    const [currentPosition, setCurrentPosition] = useState(POSITIONS.MENU);
-    const selectedCoreStateSelector = useAppSelector(coreStateSelector);
-    const dispatch = useAppDispatch();
+    const [currentPosition, setCurrentPosition] = useState(POSITIONS.MENU)
+    const dispatch = useAppDispatch()
 
     const handleStart = useCallback(() => {
-        dispatch(closeMainMenu());
-    }, [dispatch]);
+        dispatch(closeMainMenu())
+    }, [dispatch])
 
     const handleBack = useCallback(() => {
-        setCurrentPosition(POSITIONS.MENU);
-    }, []);
+        setCurrentPosition(POSITIONS.MENU)
+    }, [])
 
     const handleOpenSettings = useCallback(() => {
-        setCurrentPosition(POSITIONS.SETTINGS);
-    }, []);
+        setCurrentPosition(POSITIONS.SETTINGS)
+    }, [])
 
     const handleExit = useCallback(() => {
-        window.close();
+        window.close()
     }, [])
 
     if (currentPosition === POSITIONS.MENU) {
         return (
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
             <div className={s.menuContainer}>
                 <Button onClick={handleStart}>Начать</Button>
                 <Button onClick={handleOpenSettings}>Настройки</Button>
@@ -44,11 +44,12 @@ function MainMenu() {
         )
     } else if (currentPosition === POSITIONS.SETTINGS) {
         return (
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
             <div className={s.menuContainer}>
-                <Settings handleBack={handleBack}/>
+                <Settings handleBack={handleBack} />
             </div>
         )
     }
 }
 
-export {MainMenu};
+export { MainMenu }

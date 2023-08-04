@@ -1,10 +1,10 @@
-export { chunk, directionObj, currentPlayer, currentMouse } from './constants';
+export { chunk, directionObj, currentPlayer, currentMouse } from './constants'
 export {
-  diagonalSpd,
-  roundNumber,
-  getSpeedComponents,
-  setPlayerMove,
-  setPlayerPosition,
-  setMouseMapPosition,
-  setMousePosition,
-} from './helpers';
+    diagonalSpd,
+    roundNumber,
+    getSpeedComponents,
+    setPlayerMove,
+    setPlayerPosition,
+    setMouseMapPosition,
+    setMousePosition,
+} from './helpers'

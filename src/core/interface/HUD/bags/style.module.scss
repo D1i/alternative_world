@@ -1,34 +1,34 @@
 .bags {
-  background: #442401;
-  border: 1px solid #f18d24;
-  border-radius: 5px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
+    background: #442401;
+    border: 1px solid #f18d24;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
 
-  & > div {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    background-color: #8c6a51;
+    & > div {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #8c6a51;
 
-    &:hover {
-      background-color: #8c7361;
+        &:hover {
+            background-color: #8c7361;
+        }
     }
-  }
 
-  & > .smallBag {
-  }
+    & > .smallBag {
+    }
 
-  & > .mediumBag {
-  }
+    & > .mediumBag {
+    }
 
-  & > .bigBag {
-    background-image: url("./big-bag-icon.png");
-    background-size: cover;
-  }
+    & > .bigBag {
+        background-image: url('./big-bag-icon.png');
+        background-size: cover;
+    }
 }

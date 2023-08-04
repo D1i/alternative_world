@@ -1,1 +1,1 @@
-export {HUDCore} from './HUDCore';
+export { HUDCore } from './HUDCore'

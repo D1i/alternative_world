@@ -1,1 +1,1 @@
-export {utils} from './utils';
+export { utils } from './utils'

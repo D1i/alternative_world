@@ -1,18 +1,18 @@
 .topRow {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  height: 300px;
-  .direct {
-    font-size: 50px;
-    align-self: center;
-  }
-  .directText {
-    font-size: 30px;
-    align-self: center;
-  }
-  div {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
-  }
+    height: 300px;
+    .direct {
+        font-size: 50px;
+        align-self: center;
+    }
+    .directText {
+        font-size: 30px;
+        align-self: center;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+    }
 }

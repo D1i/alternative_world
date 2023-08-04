@@ -1,1 +1,1 @@
-export { MoveContext, MoveBtns } from './move-btns';
+export { MoveContext, MoveBtns } from './move-btns'

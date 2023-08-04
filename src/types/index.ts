@@ -1,3 +1,3 @@
-import * as HUDTypes from './HUD';
+import * as HUDTypes from './HUD'
 
-export {HUDTypes};
+export { HUDTypes }

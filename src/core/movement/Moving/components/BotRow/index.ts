@@ -1,1 +1,1 @@
-export { BotRow } from './BotRow';
+export { BotRow } from './BotRow'

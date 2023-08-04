@@ -1,1 +1,1 @@
-export { MovementCore } from './MovementCore';
+export { MovementCore } from './MovementCore'

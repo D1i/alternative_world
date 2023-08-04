@@ -1,5 +1,5 @@
-import {codeGenerator} from "../utils/code-generator";
-import {HUDTypes} from "../types";
+import { codeGenerator } from '../utils/code-generator'
+import { HUDTypes } from '../types'
 
 export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
     {
@@ -12,8 +12,10 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
         endX: 0,
         endY: 0,
         zIndex: 0,
-        specialData: {},
-        size: {width: 100, height: 100},
+        specialData: {
+            todo: 'todo'
+        },
+        size: { width: 100, height: 100 },
     },
     {
         id: 0,
@@ -35,12 +37,29 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
             maxLimit: 250,
             inner: [
                 {
-                    id: 0, name: 'wood', mass: 10, width: 6, height: 2, x: 1, y: 0, z: 0, code: 124124124
-                }, {
-                    id: 1, name: 'stick', mass: 10, width: 1, height: 2, x: 0, y: 0, z: 0, code: 4141241
-                }
-            ]
+                    id: 0,
+                    name: 'wood',
+                    mass: 10,
+                    width: 6,
+                    height: 2,
+                    x: 1,
+                    y: 0,
+                    z: 0,
+                    code: 124124124,
+                },
+                {
+                    id: 1,
+                    name: 'stick',
+                    mass: 10,
+                    width: 1,
+                    height: 2,
+                    x: 0,
+                    y: 0,
+                    z: 0,
+                    code: 4141241,
+                },
+            ],
         },
-        size: {width: 100, height: 100},
+        size: { width: 100, height: 100 },
     },
 ]

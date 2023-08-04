@@ -1,7 +1,7 @@
 export {
-  keyVector,
-  directionVector,
-  playerState,
-  playerTest,
-  mouseTest,
-} from './types';
+    keyVector,
+    directionVector,
+    playerState,
+    playerTest,
+    mouseTest,
+} from './types'

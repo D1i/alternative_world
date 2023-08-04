@@ -1,1 +1,1 @@
-export {bagGenerator} from './bag-generator';
+export { bagGenerator } from './bag-generator'

@@ -3,13 +3,12 @@ enum Name {
     STICK = 'stick',
 }
 
-
 export type Item = {
-    id: number,
-    name: Name,
-    mass: number,
-    width: number,
-    height: number,
+    id: number
+    name: Name
+    mass: number
+    width: number
+    height: number
 }
 
 export const items: Array<Item> = [
@@ -26,5 +25,5 @@ export const items: Array<Item> = [
         mass: 50,
         width: 1,
         height: 2,
-    }
+    },
 ]

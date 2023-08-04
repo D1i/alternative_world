@@ -1,23 +1,23 @@
 .container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px;
-  background: #442401;
-  border: 1px solid #f18d24;
-  border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    background: #442401;
+    border: 1px solid #f18d24;
+    border-radius: 5px;
 
-  & > .header {
-    display: flex;
-    justify-content: flex-end;
+    & > .header {
+        display: flex;
+        justify-content: flex-end;
 
-    & > .closeBtn {
-      cursor: pointer;
-      font-family: Arial;
-      font-weight: 800;
-      font-size: 30px;
-      color: #FFF;
-      padding: 5px;
+        & > .closeBtn {
+            cursor: pointer;
+            font-family: Arial;
+            font-weight: 800;
+            font-size: 30px;
+            color: #fff;
+            padding: 5px;
+        }
     }
-  }
 }

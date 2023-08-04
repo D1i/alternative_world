@@ -1,1 +1,1 @@
-export { MidRow } from './MidRow';
+export { MidRow } from './MidRow'
