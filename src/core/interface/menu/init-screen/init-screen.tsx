@@ -35,7 +35,6 @@ function InitScreen() {
             onKeyDownCapture={handleInitGameProcessOnKeyDown}
             tabIndex={0}
         >
-
             {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */}
             <div className={s.menuContainer}>
                 {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */}

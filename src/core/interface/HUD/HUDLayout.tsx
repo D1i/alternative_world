@@ -14,18 +14,14 @@ enum Mode {
 // }
 
 function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [mode, setMode] = useState<Mode>(Mode.NONE)
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [itemBuffer, setItemBuffer] = useState<null | HUDTypes.ItemExemplar>(
         null
     )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [itemBufferedElement, setItemBufferedElement] =
         useState<null | JSX.Element>(null)
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [currentShiftingHUD, setCurrentShiftingHUD] =
         useState<null | Ref<JSX.Element>>(null)
 
@@ -41,12 +37,10 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
         })
     }, [])
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleAddBufferItem = useCallback(() => {}, [])
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const handleRemoveBufferItem = useCallback(() => {}, [])
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleSetShiftingHUD = useCallback((ref: Ref<JSX.Element>) => {
         setCurrentShiftingHUD(ref)
     }, [])

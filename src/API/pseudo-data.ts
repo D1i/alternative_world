@@ -13,7 +13,7 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
         endY: 0,
         zIndex: 0,
         specialData: {
-            todo: 'todo'
+            todo: 'todo',
         },
         size: { width: 100, height: 100 },
     },

@@ -68,7 +68,11 @@ class Utils {
         )
     }
 
-    collisionOutlineBag = function (bagWidth: number, bagHeight: number, item: ItemExemplar) {
+    collisionOutlineBag = function (
+        bagWidth: number,
+        bagHeight: number,
+        item: ItemExemplar
+    ) {
         const xCollision =
             item.x > bagWidth || item.x < 0 || item.x + item.width > bagWidth
         const yCollision =

@@ -12,12 +12,9 @@ INTERFACE_CORE_VERSION.
 SYNC_CORE_VERSION
 </code>
 
-**ПРИМЕР** - *10.5.2.5.1.199*
+**ПРИМЕР** - _10.5.2.5.1.199_
 
 <h3>ПРАВИЛА ДЛЯ PRODUCT VERSION</h3>
 ***ПРАВИЛА ИМЕНОВАНИЯ КОММИТОВ:*** <br>
 Название ветки с актуальной версией: STABLE-CORE <br>
 <code>1.1.1</code>
-
-
-

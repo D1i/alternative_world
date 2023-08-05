@@ -6,6 +6,6 @@
         "noImplicitAny": false,
         "paths": {
             "@store-redux/*": ["./redux/*"]
-        },
+        }
     }
 }

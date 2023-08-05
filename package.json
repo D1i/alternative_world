@@ -1,71 +1,71 @@
 {
-  "name": "aGame",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "D1i <maximkalin431@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.2",
-    "@react-buddy/ide-toolbox": "^2.4.0",
-    "@react-buddy/palette-mui": "^5.0.1",
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/lodash": "^4.14.196",
-    "axios": "^1.4.0",
-    "classnames": "^2.3.2",
-    "css-loader": "^6.8.1",
-    "eslint": "^8.46.0",
-    "file-loader": "^6.2.0",
-    "lodash": "^4.17.21",
-    "node-sass": "^9.0.0",
-    "prettier": "3.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-redux": "^8.1.2",
-    "react-scripts": "^5.0.1",
-    "redux-saga": "^1.2.3",
-    "sass": "^1.64.1",
-    "scss": "^0.2.4",
-    "scss-loader": "^0.0.1",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "code-format": "prettier . --check",
-    "build-stats": "npm run build -- --stats",
-    "lint": "eslint --fix --ext .ts,.tsx .",
-    "webpack-analyzer": "webpack-bundle-analyzer build/bundle-stats.json"
-  },
-  "devDependencies": {
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
-    "@typescript-eslint/parser": "^6.2.1",
-    "eslint-config-standard-with-typescript": "^37.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.33.1",
-    "sass-loader": "^13.3.2",
-    "typescript": "^5.1.6",
-    "webpack-bundle-analyzer": "^4.9.0",
-    "jest": "^29.6.2"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "aGame",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "D1i <maximkalin431@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.14.2",
+        "@react-buddy/ide-toolbox": "^2.4.0",
+        "@react-buddy/palette-mui": "^5.0.1",
+        "@reduxjs/toolkit": "^1.9.5",
+        "@types/lodash": "^4.14.196",
+        "axios": "^1.4.0",
+        "classnames": "^2.3.2",
+        "css-loader": "^6.8.1",
+        "eslint": "^8.46.0",
+        "file-loader": "^6.2.0",
+        "lodash": "^4.17.21",
+        "node-sass": "^9.0.0",
+        "prettier": "3.0.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-redux": "^8.1.2",
+        "react-scripts": "^5.0.1",
+        "redux-saga": "^1.2.3",
+        "sass": "^1.64.1",
+        "scss": "^0.2.4",
+        "scss-loader": "^0.0.1",
+        "style-loader": "^3.3.3",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "code-format": "prettier . --check",
+        "build-stats": "npm run build -- --stats",
+        "lint": "eslint --fix --ext .ts,.tsx .",
+        "webpack-analyzer": "webpack-bundle-analyzer build/bundle-stats.json"
+    },
+    "devDependencies": {
+        "@types/react-dom": "^18.2.7",
+        "@typescript-eslint/eslint-plugin": "^6.2.1",
+        "@typescript-eslint/parser": "^6.2.1",
+        "eslint-config-standard-with-typescript": "^37.0.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+        "eslint-plugin-promise": "^6.0.0",
+        "eslint-plugin-react": "^7.33.1",
+        "sass-loader": "^13.3.2",
+        "typescript": "^5.1.6",
+        "webpack-bundle-analyzer": "^4.9.0",
+        "jest": "^29.6.2"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
