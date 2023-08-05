@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require('path');
 const BundleAnalyzerPlugin =
-    require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+    require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.ts'),
@@ -62,4 +62,4 @@ module.exports = {
             },
         ],
     },
-}
+};
