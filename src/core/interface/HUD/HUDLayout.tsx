@@ -126,8 +126,11 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
                     (HUDI) => !isEqualCodes(HUDI, importHUD)
                 );
 
+                console.log('prev');
                 console.log(prevHUDS);
+                console.log('export');
                 console.log(exportHUD);
+                console.log('import');
                 console.log(importHUD);
 
                 itemBuffer.x = position.cellX;
