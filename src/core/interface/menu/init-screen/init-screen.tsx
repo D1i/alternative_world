@@ -3,7 +3,6 @@ import { Button } from '@mui/material'
 import * as classNames from 'classnames'
 
 import { useAppDispatch } from '../../../../redux/hooks'
-import { playSound, useAudio } from '../../../audio'
 import { initProcess } from '../../../../redux/HUDReducer'
 
 import s from './style.module.scss'
@@ -12,20 +11,13 @@ const F11: number = 122
 
 function InitScreen() {
     const dispatch = useAppDispatch()
-    const audioCoreInit = useAudio()
 
     const [initedProcess, setInitedProcess] = useState(false)
     const handleInitGameProcesses = useCallback(() => {
-        const sound1 = new audioCoreInit(0).setVolume(50).play()
-
         setTimeout(() => {
             dispatch(initProcess())
-            sound1.clear()
         }, 1000)
         setInitedProcess(true)
-
-        // playSound(3)
-        // playSound(4)
     }, [])
 
     const handleInitGameProcessOnKeyDown = useCallback((event) => {

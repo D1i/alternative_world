@@ -1,1 +1,1 @@
-export {InterfaceCore} from "./interface-core";
+export { InterfaceCore } from './interface-core'

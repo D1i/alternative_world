@@ -1,43 +1,21 @@
 import { createContext } from 'react'
+import { useAppDispatch } from '../../redux/hooks'
+import { addSound } from '../../redux/HUDReducer'
+import { AudioBuilder } from './AudioBuilder'
 
-import { sounds } from './sounds'
+const AudioContext = createContext<(id: string) => AudioBuilder>(null)
 
-const AudioContext = createContext(null)
+interface props {
+    children: React.ReactNode
+}
 
-export function AudioCore(props) {
-    class audioCoreInit {
-        audio: HTMLAudioElement
-        constructor(audioId: number) {
-            this.audio = new Audio(sounds[audioId])
-        }
+function AudioCore(props: props) {
+    const dispatch = useAppDispatch()
 
-        setVolume(value: number) {
-            this.audio.volume = value / 100
-            return this
-        }
-
-        play() {
-            this.audio.play()
-            return this
-        }
-
-        pause() {
-            this.audio.pause()
-            return this
-        }
-
-        to(value: string) {
-            const length = value.length
-            const minutes = Number(value.slice(0, length - 2))
-            const seconds = Number(value.slice(length - 2, length))
-            const totalSeconds = seconds + minutes * 60
-            this.audio.currentTime = totalSeconds
-            return this
-        }
-
-        clear() {
-            delete this.audio
-        }
+    const audioCoreInit = (id: string): AudioBuilder => {
+        const sound: AudioBuilder = new AudioBuilder(id, dispatch)
+        dispatch(addSound(id))
+        return sound
     }
 
     return (
@@ -47,4 +25,4 @@ export function AudioCore(props) {
     )
 }
 
-export { AudioContext }
+export { AudioContext, AudioCore }

@@ -3,10 +3,7 @@ import { RootState } from './store'
 
 import { HUDTypes } from 'src/types'
 
-interface AudioCollection {
-    id: number
-    volume: number
-}
+type AudioCollection = '0' | '1' | '2' | '3' | '4'
 
 export interface CoreState {
     interface: {
@@ -185,6 +182,17 @@ export const coreStateSlice = createSlice({
         initProcess: (state) => {
             state.interface.HUD.initedProcess = true
         },
+
+        addSound: (state, action) => {
+            state.audio.played.push(action.payload)
+        },
+
+        clearSound: (state, action) => {
+            const index = state.audio.played.indexOf(action.payload)
+            if (index !== -1) {
+                state.audio.played.splice(index, 1)
+            }
+        },
     },
 })
 export const {
@@ -197,6 +205,8 @@ export const {
     setVolme,
     addBag,
     initProcess,
+    addSound,
+    clearSound,
 } = coreStateSlice.actions
 export const coreStateSelector = (state: RootState) => state.coreStateReducer
 export default coreStateSlice.reducer
