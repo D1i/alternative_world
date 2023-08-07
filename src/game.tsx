@@ -1,18 +1,28 @@
-import { InterfaceCore } from './core'
+import { InterfaceCore } from './core';
 
-import { useAppSelector } from './redux/hooks'
-import { coreStateSelector } from './redux/HUDReducer'
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { addHUD, coreStateSelector } from './redux/HUDReducer';
 
-import { InitScreen } from './core/interface/menu/init-screen'
-import { MovementCore } from './core/movement'
+import { InitScreen } from './core/interface/menu/init-screen';
+import { MovementCore } from './core/movement';
 import { FpsView } from 'react-fps';
+import { useEffect } from 'react';
+import { initData } from './API/pseudo-data';
 
 function Game() {
-    const selectedCoreStateSelector = useAppSelector(coreStateSelector)
-
+    const selectedCoreStateSelector = useAppSelector(coreStateSelector);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        if (selectedCoreStateSelector.interface.HUDs.length) {
+            return;
+        }
+        initData().forEach((HUD) => {
+            dispatch(addHUD(HUD.getSerializableObject()));
+        });
+    }, []);
     return (
         <div>
-            {!selectedCoreStateSelector.interface.HUD.initedProcess && (
+            {!selectedCoreStateSelector.interface.initedProcess && (
                 <InitScreen />
             )}
             {!selectedCoreStateSelector.interface.menu.main && (
@@ -21,7 +31,7 @@ function Game() {
             <InterfaceCore />
             <FpsView left={window.innerWidth - 200} width={200} />
         </div>
-    )
+    );
 }
 
-export { Game }
+export { Game };

@@ -11,5 +11,16 @@ module.exports = {
     ],
     rules: {
         semi: 1,
+        "max-len": [
+            "error",
+            {
+                "code": 120,
+                "tabWidth": 2,
+                "ignoreComments": true, //"comments": 80
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ]
     },
-}
+};

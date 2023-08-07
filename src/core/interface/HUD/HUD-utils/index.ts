@@ -1,1 +1,1 @@
-export { HUDBuilder } from './HUDBuilder'
+export { HUDBuilder } from './HUD-builder'

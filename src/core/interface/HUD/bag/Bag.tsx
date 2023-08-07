@@ -2,6 +2,8 @@ import { CellForItems } from '../cell-for-items';
 import { useCallback, useRef } from 'react';
 import { CELL_SIZE } from 'src/constants';
 
+// mouseSelectTarget
+// currentSelectedItem
 function Bag(props) {
     const container = useRef();
 
@@ -11,7 +13,7 @@ function Bag(props) {
             position.cellX = Math.ceil(
                 (event['pageX'] -
                     // @ts-ignore
-                    container?.current?.getBoundingClientRect().x) / CELL_SIZE
+                    container?.current?.getBoundingClientRect().x ) / CELL_SIZE
             ) - 1;
             position.cellY = Math.ceil(
                 (event['pageY'] -
@@ -25,10 +27,12 @@ function Bag(props) {
     );
 
     return (
-        <div ref={container} onMouseUp={handleItemDrop}>
+        <div ref={container} onMouseDown={props.setSourceBag} onMouseUp={handleItemDrop}>
+            <b>{props.data.name}</b>
             <CellForItems
                 addBufferItem={props.addBufferItem}
                 data={props.data}
+                currentSelectedItem={props.currentSelectedItem}
             />
         </div>
     );

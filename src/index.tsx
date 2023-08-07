@@ -12,8 +12,6 @@ import { StrictMode } from 'react';
 const root = createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <StrictMode>
-            <Game />
-        </StrictMode>
+        <Game />
     </Provider>
 );

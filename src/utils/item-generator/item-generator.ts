@@ -24,6 +24,20 @@ class ItemExemplarClass implements HUDTypes.ItemExemplar {
     x: number;
     y: number;
     z: number;
+
+    getSerializableObject = () => {
+        return {
+            code: this.code,
+            height: this.height,
+            id: this.id,
+            mass: this.mass,
+            name: this.name,
+            width: this.width,
+            x: this.x,
+            y: this.y,
+            z: this.z,
+        };
+    };
 }
 
 export function itemGenerator(id) {

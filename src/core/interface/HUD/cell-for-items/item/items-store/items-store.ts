@@ -7,8 +7,8 @@ export const itemsStore: Array<Item> = [
         id: 0,
         name: 'wood',
         mass: 2000,
-        width: 2,
-        height: 1,
+        width: 6,
+        height: 2,
         maxStack: 1,
     },
     {

@@ -2,6 +2,8 @@ import { codeGenerator } from '../code-generator';
 import { HUDTypes } from '../../types';
 import { HUD, ItemExemplar } from '../../types/HUD';
 import { itemGenerator } from '../item-generator';
+import { useAppDispatch } from '../../redux/hooks';
+import { editBag } from '../../redux/HUDReducer';
 
 type Size = {
     width: number;
@@ -28,6 +30,13 @@ class Bag implements Bag {
         this.mass = 1000;
         this.inner = [];
     }
+
+    syncStore = (dispatch) => {
+        // @ts-ignore
+        dispatch(editBag(this));
+
+        return this;
+    };
 
     private itemCollision = (item: HUDTypes.ItemExemplar) => {
         return !!this.inner.find((innerItem: HUDTypes.ItemExemplar) => {
@@ -76,13 +85,12 @@ class Bag implements Bag {
 
     itemPut = (item: HUDTypes.ItemExemplar) => {
         if (this.itemCollision(item)) {
-            return false;
+            return null;
         }
 
         const innerItem = this.inner.find(
             (innerItem: HUDTypes.ItemExemplar) => innerItem.code === item.code
         );
-
         let repositionedItem = null;
 
         if (innerItem) {
@@ -102,8 +110,7 @@ class Bag implements Bag {
             ),
             repositionedItem,
         ];
-
-        return true;
+        return this;
     };
 
     itemAutoPut = (item: HUDTypes.ItemExemplar) => {
@@ -118,7 +125,13 @@ class Bag implements Bag {
         return false;
     };
 
-    itemShiftOnOtherBag = (item: HUDTypes.ItemExemplar, bagTarget: Bag) => {};
+    itemShiftOnOtherBag = (item: HUDTypes.ItemExemplar, bagTarget: Bag) => {
+        if (bagTarget.itemPut(item)) {
+            this.inner = this.inner.filter((innerItem) => innerItem.code !== item.code);
+        }
+
+        return this;
+    };
 
     dropItem = (item: HUDTypes.ItemExemplar, position) => {};
 
@@ -126,6 +139,8 @@ class Bag implements Bag {
 
     bagRename = (name: string) => {
         this.name = name;
+
+        return this;
     };
 
     syncWithRedux = () => {};
@@ -135,8 +150,41 @@ class Bag implements Bag {
     bagUpgrade = (components) => {
         // craftSys(upgrade(this.bag, components);
     };
+
+    setWrapper = (data) => {
+        this.id = data.id;
+        this.code = data.code;
+        this.name = data.name;
+        this.x = data.x;
+        this.y = data.y;
+        this.maxLimit = data.maxLimit;
+        this.mass = data.mass;
+        this.inner = data.inner;
+    };
+
+    getSerializableObject = () => {
+        return {
+            id: this.id,
+            code: this.code,
+            name: this.name,
+            x: this.x,
+            y: this.y,
+            maxLimit: this.maxLimit,
+            mass: this.mass,
+            // @ts-ignore
+            inner: this.inner.map((item) =>
+                // @ts-ignore
+                item?.getSerializableObject
+                    ? // @ts-ignore
+                      item?.getSerializableObject()
+                    : item
+            ),
+        };
+    };
 }
 
 export function bagGenerator(size: Size): Bag {
     return new Bag(size);
 }
+
+export { Bag as BagClass };

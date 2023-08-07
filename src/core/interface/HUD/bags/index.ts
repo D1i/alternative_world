@@ -1,1 +1,0 @@
-export { Bags } from './bags'

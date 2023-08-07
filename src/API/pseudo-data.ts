@@ -3,6 +3,8 @@ import { HUDTypes } from '../types';
 import { HUD, Types } from '../types/HUD';
 import utils from '../utils';
 import { HUDBuilder } from '../core/interface/HUD/HUD-utils';
+import { useAppDispatch } from '../redux/hooks';
+import { addHUD } from '../redux/HUDReducer';
 
 const pseudoData: Array<HUD> = [
     {
@@ -24,7 +26,7 @@ const pseudoData: Array<HUD> = [
     },
     {
         id: 0,
-        name: 'BAG_2',
+        name: 'BAG_1',
         code: codeGenerator(),
         type: HUDTypes.Types.BAG,
         hasShifting: false,
@@ -36,7 +38,7 @@ const pseudoData: Array<HUD> = [
         specialData: {
             id: 0,
             code: codeGenerator(),
-            name: 'basic bag',
+            name: 'bag 1',
             x: 9,
             y: 9,
             mass: 5,
@@ -82,7 +84,7 @@ const pseudoData: Array<HUD> = [
     },
     {
         id: 0,
-        name: 'BAG_1',
+        name: 'BAG_2',
         code: codeGenerator(),
         type: HUDTypes.Types.BAG,
         hasShifting: false,
@@ -94,7 +96,7 @@ const pseudoData: Array<HUD> = [
         specialData: {
             id: 0,
             code: codeGenerator(),
-            name: 'basic bag',
+            name: 'bag 2',
             x: 9,
             y: 9,
             mass: 5,
@@ -125,30 +127,11 @@ const pseudoData: Array<HUD> = [
             ],
         },
         size: { width: 100, height: 100 },
-    },
-    {
-        id: 100,
-        name: 'DEV_INFO',
-        code: codeGenerator(),
-        type: HUDTypes.Types.DEV_INFO,
-        hasShifting: false,
-        startX: 0,
-        startY: 0,
-        endX: 0,
-        endY: 0,
-        zIndex: 0,
-        specialData: {
-            id: 451521,
-            type: HUDTypes.Types.DEV_INFO,
-            todo: 'todo',
-        },
-        size: {
-            width: 0,
-            height: 0,
-        },
-    },
+    }
 ];
 
-export const PSEUDO_DATA: Array<HUDTypes.HUD> = pseudoData.map((HUD): HUD => {
-    return new HUDBuilder(HUD);
-});
+export const initData = (data?) => {
+    return (data || pseudoData).map((HUD) => {
+        return new HUDBuilder(HUD);
+    });
+};

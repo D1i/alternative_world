@@ -50,7 +50,8 @@ class HUDBuilder implements HUDTypes.HUD {
                         height: specialDateSource.y,
                     })
                         .setId(specialDateSource.id)
-                        .setInner(specialDateSource.inner);
+                        .setInner(specialDateSource.inner)
+                        .bagRename(specialDateSource.name);
                     break;
                 }
                 this.specialData = specialDateSource;
@@ -94,6 +95,28 @@ class HUDBuilder implements HUDTypes.HUD {
         this.zIndex = zIndex;
 
         return this;
+    };
+
+    getSerializableObject = () => {
+        // @ts-ignore
+        return {
+            id: this.id,
+            name: this.name,
+            code: this.code,
+            type: this.type,
+            hasShifting: this.hasShifting,
+            startX: this.startX,
+            startY: this.startY,
+            endX: this.endX,
+            endY: this.endY,
+            zIndex: this.zIndex,
+            // @ts-ignore
+            specialData: this.specialData?.getSerializableObject
+                ? // @ts-ignore
+                  this.specialData?.getSerializableObject()
+                : this.specialData,
+            size: this.size,
+        };
     };
 }
 
