@@ -1,16 +1,19 @@
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux/es/exports'
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux/es/exports';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { Game } from './game.tsx'
-import { store } from './redux/store'
+import { Game } from './game.tsx';
+import { store } from './redux/store';
 
-import './style.scss'
+import './style.scss';
+import { StrictMode } from 'react';
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <Game />
+        <StrictMode>
+            <Game />
+        </StrictMode>
     </Provider>
-)
+);

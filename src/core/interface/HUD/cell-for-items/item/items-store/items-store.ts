@@ -2,7 +2,7 @@ import { Item } from 'src/types/HUD';
 
 import texture from './texture';
 
-const itemsStore: Array<Item> = [
+export const itemsStore: Array<Item> = [
     {
         id: 0,
         name: 'wood',

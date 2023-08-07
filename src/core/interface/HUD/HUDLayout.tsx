@@ -7,6 +7,7 @@ import { Bag } from './bag';
 import { setBufferItem } from '../../../redux/HUDReducer';
 import { Types } from 'src/types/HUD';
 import { HUDInfo } from './dev-HUDS';
+import { PSEUDO_DATA } from '../../../API/pseudo-data';
 
 enum Mode {
     NONE = 'NONE',
@@ -31,7 +32,6 @@ function isEqualCodes(
 
 function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
     const [HUDSLocal, setHUDLocal] = useState(props.HUDS);
-
     // const [mode, setMode] = useState<Mode>(Mode.NONE);
 
     const [mousePosition, setMousePosition] = useState<{
@@ -49,20 +49,14 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
 
     const handleAddBufferItem = useCallback(
         (code: number) => {
-            console.log(code);
-            console.log('--------------');
             let item = null;
             props.HUDS.forEach((p) => {
                 if ('inner' in p.specialData && !item) {
                     item = p.specialData?.inner.find((item) => {
-                        console.log(
-                            `${item.code} ${item.code === code ? '✅' : ''}`
-                        );
                         return item.code === code;
                     });
                 }
             });
-            console.log(item);
             setBufferItem(item);
             setItemBuffer(item);
         },
@@ -112,8 +106,10 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
                 }
 
                 const exportHUD = HUDSLocal.find((HUDI) => {
-                    if (isEqualCodes(HUDI, importHUD) || HUDI.type !== Types.BAG) {
-                        console.log('denied');
+                    if (
+                        isEqualCodes(HUDI, importHUD) ||
+                        HUDI?.type !== Types.BAG
+                    ) {
                         return;
                     }
                     // @ts-ignore
@@ -123,31 +119,38 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
                 });
 
                 const prevHUDS = HUDSLocal.filter(
-                    (HUDI) => !isEqualCodes(HUDI, importHUD)
+                    (HUDI) =>
+                        !isEqualCodes(HUDI, importHUD) &&
+                        !isEqualCodes(HUDI, exportHUD || { code: null })
                 );
-
-                console.log('prev');
-                console.log(prevHUDS);
-                console.log('export');
-                console.log(exportHUD);
-                console.log('import');
-                console.log(importHUD);
 
                 itemBuffer.x = position.cellX;
                 itemBuffer.y = position.cellY;
 
-                if (exportHUD && exportHUD.type === 'BAG') {
+                if (exportHUD && exportHUD?.type === 'BAG') {
                     // @ts-ignore
                     exportHUD.specialData.inner =
                         // @ts-ignore
                         exportHUD.specialData.inner.filter((item) =>
-                            isEqualCodes(item, itemBuffer)
+                            !isEqualCodes(item, itemBuffer)
+                        );
+                }
+
+                if (importHUD && importHUD?.type === 'BAG') {
+                    // @ts-ignore
+                    importHUD.specialData.inner =
+                        // @ts-ignore
+                        importHUD.specialData.inner.filter((item) =>
+                            !isEqualCodes(item, itemBuffer)
                         );
                 }
 
                 // @ts-ignore
                 importHUD.specialData.inner.push(itemBuffer);
-                if (exportHUD) {
+                if (
+                    exportHUD &&
+                    !isEqualCodes(exportHUD || { code: null }, importHUD)
+                ) {
                     setHUDLocal([...prevHUDS, exportHUD, importHUD]);
                 } else {
                     setHUDLocal([...prevHUDS, importHUD]);
@@ -177,7 +180,6 @@ function HUDLayout(props: { HUDS: Array<HUDTypes.HUD> }) {
 
     const HUDSElements = useMemo(() => {
         return HUDSLocal.map((HUD: HUDTypes.HUD) => {
-            console.log(HUD);
             if (HUD.type === HUDTypes.Types.ADMIN_PANEL) {
                 return <AdminPanel key={HUD.code} />;
             } else if (HUD.type === HUDTypes.Types.DEV_INFO) {

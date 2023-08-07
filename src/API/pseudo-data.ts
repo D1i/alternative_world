@@ -1,10 +1,13 @@
 import { codeGenerator } from '../utils/code-generator';
 import { HUDTypes } from '../types';
-import { Types } from '../types/HUD';
+import { HUD, Types } from '../types/HUD';
+import utils from '../utils';
+import { HUDBuilder } from '../core/interface/HUD/HUD-utils';
 
-export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
+const pseudoData: Array<HUD> = [
     {
         id: 0,
+        name: 'ADMIN_PANEL',
         code: codeGenerator(),
         type: HUDTypes.Types.ADMIN_PANEL,
         hasShifting: false,
@@ -14,12 +17,14 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
         endY: 0,
         zIndex: 0,
         specialData: {
+            id: 124,
             todo: 'todo',
         },
         size: { width: 100, height: 100 },
     },
     {
         id: 0,
+        name: 'BAG_2',
         code: codeGenerator(),
         type: HUDTypes.Types.BAG,
         hasShifting: false,
@@ -59,12 +64,25 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
                     z: 0,
                     code: codeGenerator(),
                 },
+                {
+                    id: 4,
+                    name: 'coal',
+                    mass: 1000,
+                    width: 2,
+                    height: 2,
+                    maxStack: 5,
+                    x: 5,
+                    y: 5,
+                    z: 0,
+                    code: codeGenerator(),
+                },
             ],
         },
         size: { width: 100, height: 100 },
     },
     {
         id: 0,
+        name: 'BAG_1',
         code: codeGenerator(),
         type: HUDTypes.Types.BAG,
         hasShifting: false,
@@ -110,6 +128,7 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
     },
     {
         id: 100,
+        name: 'DEV_INFO',
         code: codeGenerator(),
         type: HUDTypes.Types.DEV_INFO,
         hasShifting: false,
@@ -117,13 +136,19 @@ export const PSEUDO_DATA: Array<HUDTypes.HUD> = [
         startY: 0,
         endX: 0,
         endY: 0,
+        zIndex: 0,
+        specialData: {
+            id: 451521,
+            type: HUDTypes.Types.DEV_INFO,
+            todo: 'todo',
+        },
         size: {
             width: 0,
             height: 0,
         },
-        specialData: {
-            type: HUDTypes.Types.DEV_INFO,
-            todo: 'todo',
-        },
     },
 ];
+
+export const PSEUDO_DATA: Array<HUDTypes.HUD> = pseudoData.map((HUD): HUD => {
+    return new HUDBuilder(HUD);
+});

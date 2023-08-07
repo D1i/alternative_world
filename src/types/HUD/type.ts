@@ -37,10 +37,12 @@ export interface Bag {
 }
 
 export type Profile = {
+    id: number;
     todo: string;
 };
 
 export type AdminPanel = {
+    id: number;
     todo: string;
 };
 
@@ -52,6 +54,7 @@ export enum Types {
 }
 
 export type DevInfo = {
+    id: number;
     type: Types.DEV_INFO;
     todo: string;
 };
@@ -61,8 +64,11 @@ export type Size = {
     height: number;
 };
 
+export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo;
+
 export type HUD = {
     id: number;
+    name: string;
     code: number;
     type: Types;
     hasShifting: boolean;
@@ -71,6 +77,6 @@ export type HUD = {
     endX: number;
     endY: number;
     zIndex?: number;
-    specialData: Bag | Profile | AdminPanel | DevInfo;
+    specialData: HUDSpecialData;
     size: Size;
 };

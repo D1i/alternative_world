@@ -32,17 +32,20 @@ function CellForItems(props: PropsType) {
     }, [props.data.x, props.data.y]);
 
     const content = useMemo(() => {
-        return props.data.inner.map((item) => (
+        return props.data.inner.map((item) => {
+
+            return (
             <HUDItem
+                key={item.code}
                 position={{ x: item.x, y: item.y }}
                 code={item.code}
                 handleItemSelect={props.addBufferItem}
                 id={item.id}
             />
-        ));
+        )});
     }, [props]);
 
-    return <div style={style}>{content}</div>;
+    return <div key={props.data.code} style={style}>{content}</div>;
 }
 
 export { CellForItems };
