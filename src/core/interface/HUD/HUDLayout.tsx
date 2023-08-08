@@ -9,6 +9,7 @@ import { HUDInfo } from './dev-HUDS';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { coreStateSelector, editBag } from '../../../redux/HUDReducer';
 import { BagClass } from '../../../utils/bag-generator/bag-generator';
+import { PlayerSlots } from './player-slots';
 
 enum Mode {
     NONE = 'NONE',
@@ -211,18 +212,12 @@ function HUDLayout() {
     );
 
     const generateHandlePinSet = useCallback(
-        (HUD) => {
+        (HUD: HUD) => {
             // TODO Переписать на redux + sync
             return (pinPosition) => {
                 if (!pinPosition) {
                     return;
                 }
-                const prevHUDS = HUDs.filter(
-                    (HUDI) => !isEqualCodes(HUDI, HUD)
-                );
-                HUD.startX = pinPosition.x;
-                HUD.startY = pinPosition.y;
-                setHUDLocal([...prevHUDS, HUD]);
             };
         },
         [HUDs, shiftingMouseOnHUD]
@@ -276,6 +271,8 @@ function HUDLayout() {
                 }}
                 position={mousePosition}
             />
+
+            <PlayerSlots />
         </div>
     );
 }

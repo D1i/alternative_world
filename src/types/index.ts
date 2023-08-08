@@ -1,3 +1,4 @@
-import * as HUDTypes from './HUD'
+import * as HUDTypes from './HUD';
+import * as PlayerTypes from './player';
 
-export { HUDTypes }
+export { HUDTypes, PlayerTypes };
