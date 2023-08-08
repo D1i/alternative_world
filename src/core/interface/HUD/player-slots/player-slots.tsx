@@ -226,11 +226,19 @@ export function PlayerSlots() {
     }, [player, editionConfig]);
 
     return (
-        <div>
-            <div style={{ position: 'relative' }} onClick={toggleEditionConfig}>
+        <div style={{ position: 'absolute', left: '100px', top: '100px' }}>
+            <div onClick={toggleEditionConfig}>
                 <img style={{ cursor: 'pointer' }} alt="user" src={user} />
             </div>
-            {settingInterface}
+            <div
+                style={{
+                    position: 'relative',
+                    width: '200px',
+                    height: '650px',
+                }}
+            >
+                {settingInterface}
+            </div>
         </div>
     );
 }

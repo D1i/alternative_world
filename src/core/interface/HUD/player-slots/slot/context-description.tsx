@@ -23,6 +23,8 @@ export function ContextDescription(props: PropsTypes) {
                 position: 'absolute',
                 cursor: 'pointer',
                 background: 'rgba(152,147,48,0.66)',
+                top: '75px',
+                left: '-25px'
             }}
         >
             <b>{props.name}</b>
