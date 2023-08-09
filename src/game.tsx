@@ -1,4 +1,4 @@
-import { InterfaceCore } from './core';
+import { AudioCore, InterfaceCore } from './core';
 
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { addHUD, coreStateSelector } from './redux/HUDReducer';
@@ -22,14 +22,16 @@ function Game() {
     }, []);
     return (
         <div>
-            {!selectedCoreStateSelector.interface.initedProcess && (
-                <InitScreen />
-            )}
-            {!selectedCoreStateSelector.interface.menu.main && (
-                <MovementCore visibilityMode />
-            )}
-            <InterfaceCore />
-            <FpsView left={window.innerWidth - 200} width={200} />
+            <AudioCore>
+                {!selectedCoreStateSelector.interface.initedProcess && (
+                    <InitScreen />
+                )}
+                {!selectedCoreStateSelector.interface.menu.main && (
+                    <MovementCore visibilityMode />
+                )}
+                <InterfaceCore />
+                <FpsView left={window.innerWidth - 200} width={200} />
+            </AudioCore>
         </div>
     );
 }
