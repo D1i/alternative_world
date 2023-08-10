@@ -22,12 +22,14 @@ function Game() {
     }, []);
     return (
         <div>
-            {!selectedCoreStateSelector.interface.initedProcess && (
-                <InitScreen />
-            )}
-            {!selectedCoreStateSelector.interface.menu.main && (
-                <MovementCore visibilityMode />
-            )}
+            {selectedCoreStateSelector.coreConfig.movement &&
+                !selectedCoreStateSelector.interface.initedProcess && (
+                    <InitScreen />
+                )}
+            {selectedCoreStateSelector.coreConfig.movement &&
+                !selectedCoreStateSelector.interface.menu.main && (
+                    <MovementCore visibilityMode />
+                )}
             <InterfaceCore />
             <FpsView left={window.innerWidth - 200} width={200} />
         </div>

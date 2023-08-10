@@ -19,6 +19,12 @@ export enum EmployTypes {
     QUICK_ACCESS_BAG = 'QUICK_ACCESS_BAG',
 }
 
+// w1 - h1-h3 small
+// w1-w2 - h2-h5 medium
+// w2-w5 - h3-h10 large
+
+// 00 00
+// 00 00
 type EmploySourceParams = {
     id: number;
     code: number;

@@ -7,6 +7,7 @@ import { Slot } from './slot';
 // @ts-ignore
 import user from './files/player-icon.png';
 import { Format } from './slot/slot';
+import { openBag } from '../../../../redux/HUDReducer';
 
 export function PlayerSlots() {
     const [editionConfig, setEditionConfig] = useState<boolean>(false);
@@ -20,7 +21,7 @@ export function PlayerSlots() {
     }, [editionConfig]);
 
     const settingInterface = useMemo(() => {
-        if (editionConfig) {
+        if (!editionConfig) {
             return;
         }
         return (
@@ -232,6 +233,7 @@ export function PlayerSlots() {
             </div>
             <div
                 style={{
+                    display: `${openBag ? 'none' : 'block'}`,
                     position: 'relative',
                     width: '200px',
                     height: '650px',

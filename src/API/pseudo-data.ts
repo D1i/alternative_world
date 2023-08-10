@@ -5,6 +5,7 @@ import utils from '../utils';
 import { HUDBuilder } from '../core/interface/HUD/HUD-utils';
 import { useAppDispatch } from '../redux/hooks';
 import { addHUD } from '../redux/HUDReducer';
+import { Item } from '../core/interface/HUD/cell-for-items/item/item';
 
 const pseudoData: Array<HUD> = [
     {
@@ -19,6 +20,7 @@ const pseudoData: Array<HUD> = [
         endY: 0,
         zIndex: 0,
         specialData: {
+            code: codeGenerator(),
             id: 124,
             todo: 'todo',
         },
@@ -97,8 +99,8 @@ const pseudoData: Array<HUD> = [
             id: 0,
             code: codeGenerator(),
             name: 'bag 2',
-            x: 9,
-            y: 9,
+            x: 7,
+            y: 6,
             mass: 5,
             maxLimit: 250,
             inner: [
@@ -127,7 +129,29 @@ const pseudoData: Array<HUD> = [
             ],
         },
         size: { width: 100, height: 100 },
-    }
+    },
+    {
+        id: 9999,
+        name: 'Печь',
+        code: codeGenerator(),
+        type: HUDTypes.Types.FOUNDRY,
+        hasShifting: false,
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0,
+        zIndex: 0,
+        specialData: {
+            id: 0,
+            code: codeGenerator(),
+            name: 'ПЕЧЬ 1',
+            maxLimit: 250,
+            input: null,
+            output: null,
+        },
+        size: { width: 100, height: 100 },
+    },
+
 ];
 
 export const initData = (data?) => {

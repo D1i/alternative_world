@@ -5,10 +5,21 @@ import { itemGenerator } from '../item-generator';
 import { useAppDispatch } from '../../redux/hooks';
 import { editBag } from '../../redux/HUDReducer';
 
+type ObjectWithCode = {
+    code: number;
+};
+
 type Size = {
     width: number;
     height: number;
 };
+
+function isEqualCodes(
+    employA: ObjectWithCode,
+    employB: ObjectWithCode,
+): boolean {
+    return employA.code === employB.code;
+}
 
 class Bag implements Bag {
     id: number;
@@ -49,21 +60,25 @@ class Bag implements Bag {
                     innerItem.x <= item.x + item.width - 1) ||
                 (innerItem.x + innerItem.width - 1 >= item.x &&
                     innerItem.x + innerItem.width - 1 <=
-                        item.x + item.width - 1) ||
+                    item.x + item.width - 1) ||
                 (innerItem.x <= item.x + item.width - 1 &&
                     innerItem.x + innerItem.width - 1 >=
-                        item.x + item.width - 1);
+                    item.x + item.width - 1);
             const yCollision =
                 (innerItem.y >= item.y &&
                     innerItem.y <= item.y + item.height - 1) ||
                 (innerItem.y + innerItem.height - 1 >= item.y &&
                     innerItem.y + innerItem.height - 1 <=
-                        item.y + item.height - 1) ||
+                    item.y + item.height - 1) ||
                 (innerItem.y <= item.y + item.height - 1 &&
                     innerItem.y + innerItem.height - 1 >=
-                        item.y + item.height - 1);
+                    item.y + item.height - 1);
             return xCollision && yCollision;
         });
+    };
+
+    hasItem = (item) => {
+        return this.inner.find(innerItem => isEqualCodes(innerItem, item));
     };
 
     setInner = (inner: Array<ItemExemplar>) => {
@@ -83,13 +98,22 @@ class Bag implements Bag {
         return this;
     };
 
+    itemRemove = (item) => {
+        this.inner = [
+            ...this.inner.filter(
+                (innerItem: HUDTypes.ItemExemplar) =>
+                    innerItem.code !== item.code,
+            ),
+        ];
+    };
+
     itemPut = (item: HUDTypes.ItemExemplar) => {
         if (this.itemCollision(item)) {
             return null;
         }
 
         const innerItem = this.inner.find(
-            (innerItem: HUDTypes.ItemExemplar) => innerItem.code === item.code
+            (innerItem: HUDTypes.ItemExemplar) => innerItem.code === item.code,
         );
         let repositionedItem = null;
 
@@ -106,7 +130,7 @@ class Bag implements Bag {
         this.inner = [
             ...this.inner.filter(
                 (innerItem: HUDTypes.ItemExemplar) =>
-                    innerItem.code !== item.code
+                    innerItem.code !== item.code,
             ),
             repositionedItem,
         ];
@@ -127,15 +151,19 @@ class Bag implements Bag {
 
     itemShiftOnOtherBag = (item: HUDTypes.ItemExemplar, bagTarget: Bag) => {
         if (bagTarget.itemPut(item)) {
-            this.inner = this.inner.filter((innerItem) => innerItem.code !== item.code);
+            this.inner = this.inner.filter(
+                (innerItem) => innerItem.code !== item.code,
+            );
         }
 
         return this;
     };
 
-    dropItem = (item: HUDTypes.ItemExemplar, position) => {};
+    dropItem = (item: HUDTypes.ItemExemplar, position) => {
+    };
 
-    bagBreak = () => {};
+    bagBreak = () => {
+    };
 
     bagRename = (name: string) => {
         this.name = name;
@@ -143,9 +171,11 @@ class Bag implements Bag {
         return this;
     };
 
-    syncWithRedux = () => {};
+    syncWithRedux = () => {
+    };
 
-    bagDrop = () => {};
+    bagDrop = () => {
+    };
 
     bagUpgrade = (components) => {
         // craftSys(upgrade(this.bag, components);
@@ -176,8 +206,8 @@ class Bag implements Bag {
                 // @ts-ignore
                 item?.getSerializableObject
                     ? // @ts-ignore
-                      item?.getSerializableObject()
-                    : item
+                    item?.getSerializableObject()
+                    : item,
             ),
         };
     };

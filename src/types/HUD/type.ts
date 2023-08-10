@@ -37,11 +37,13 @@ export interface Bag {
 }
 
 export type Profile = {
+    code: number;
     id: number;
     todo: string;
 };
 
 export type AdminPanel = {
+    code: number;
     id: number;
     todo: string;
 };
@@ -51,9 +53,11 @@ export enum Types {
     BAG_LIST = 'BAG_LIST',
     ADMIN_PANEL = 'ADMIN_PANEL',
     DEV_INFO = 'DEV_INFO',
+    FOUNDRY = 'FOUNDRY',
 }
 
 export type DevInfo = {
+    code: number;
     id: number;
     type: Types.DEV_INFO;
     todo: string;
@@ -64,7 +68,16 @@ export type Size = {
     height: number;
 };
 
-export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo;
+export type Foundry = {
+    id: number;
+    code: number;
+    name: string;
+    maxLimit: number;
+    input: null | ItemExemplar
+    output: null | ItemExemplar
+}
+
+export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo | Foundry;
 
 export type HUD = {
     id: number;
