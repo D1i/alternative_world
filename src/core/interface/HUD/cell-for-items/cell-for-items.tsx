@@ -17,10 +17,12 @@ import {
     setExportHUD,
     setImportHUD,
     setItemBuffer,
-    setItemBufferExportHudTargetSpecific,
+    setItemBufferExportHudTargetSpecificIn,
+    setItemBufferExportHudTargetSpecificOut,
 } from 'src/redux/HUDReducer';
 
 import utils from 'src/utils';
+import { isBoolean } from 'lodash';
 
 type PropsType = {
     data: Bag;
@@ -54,13 +56,23 @@ function CellForItems(props: PropsType) {
         [selectedCoreStateSelector.interface.HUDDdata.exportHUD]
     );
 
-    const specialTargetDate = useMemo(
+    const specialTargetDateIn = useMemo(
         () =>
             selectedCoreStateSelector.interface.HUDDdata
-                .itemBufferExportHudTargetSpecific,
+                .itemBufferExportHudTargetSpecificIn,
         [
             selectedCoreStateSelector.interface.HUDDdata
-                .itemBufferExportHudTargetSpecific,
+                .itemBufferExportHudTargetSpecificIn,
+        ]
+    );
+
+    const specialTargetDateOut = useMemo(
+        () =>
+            selectedCoreStateSelector.interface.HUDDdata
+                .itemBufferExportHudTargetSpecificOut,
+        [
+            selectedCoreStateSelector.interface.HUDDdata
+                .itemBufferExportHudTargetSpecificOut,
         ]
     );
 
@@ -77,9 +89,14 @@ function CellForItems(props: PropsType) {
 
     const container = useRef();
 
-    const handleSetImportHUD = useCallback(() => {
+    const handleSetImportHUDIn = useCallback(() => {
         dispatch(setExportHUD(findHUDParrentBag(props.data)));
-        dispatch(setItemBufferExportHudTargetSpecific(props.target));
+        dispatch(setItemBufferExportHudTargetSpecificIn(props.target));
+    }, [props.data, dispatch, setImportHUD, findHUDParrentBag]);
+
+    const handleSetImportHUDOut = useCallback(() => {
+        dispatch(setExportHUD(findHUDParrentBag(props.data)));
+        dispatch(setItemBufferExportHudTargetSpecificOut(props.target));
     }, [props.data, dispatch, setImportHUD, findHUDParrentBag]);
 
     const handleItemDropMatrixCell = useCallback(
@@ -89,12 +106,12 @@ function CellForItems(props: PropsType) {
             }
             let result: boolean = false;
 
-            const target = props.target ? props.target : specialTargetDate;
+            const targetIn = props.target ? props.target : specialTargetDateIn;
+            const targetOut = specialTargetDateOut;
 
             const importHUD = findHUDParrentBag(props.data);
 
             if (importHUD.type === HUDTypes.Types.BAG) {
-                //
                 result = utils.itemizationWorker.In.Bag({
                     importHUD,
                     item: itemBuffer,
@@ -105,7 +122,7 @@ function CellForItems(props: PropsType) {
                 result = utils.itemizationWorker.In.Foundry({
                     importHUD,
                     item: itemBuffer,
-                    target,
+                    target: targetIn,
                     dispatch,
                 });
             }
@@ -123,18 +140,26 @@ function CellForItems(props: PropsType) {
             } else if (exportHUD.type === HUDTypes.Types.FOUNDRY) {
                 //
                 utils.itemizationWorker.From.Foundry({
-                    exportHUD: exportHUD,
+                    exportHUD: isBoolean(result) ? exportHUD : result,
                     item: itemBuffer,
-                    target,
+                    target: targetOut,
                     dispatch,
                 });
             }
         },
-        [itemBuffer, exportHUD, props.target, props.data, specialTargetDate]
+        [
+            itemBuffer,
+            exportHUD,
+            props.target,
+            props.data,
+            specialTargetDateIn,
+            specialTargetDateOut,
+        ]
     );
 
     const handleItemDrop = useCallback(
         (event) => {
+            handleSetImportHUDOut();
             const position = { cellX: null, cellY: null };
             props.infinityCell ||
                 (position.cellX =
@@ -290,7 +315,7 @@ function CellForItems(props: PropsType) {
 
     return (
         <div
-            onMouseDown={handleSetImportHUD}
+            onMouseDown={handleSetImportHUDOut}
             ref={container}
             onMouseMove={handleMouseMove}
             key={props.data.code}

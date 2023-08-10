@@ -15,7 +15,8 @@ export interface CoreState {
             itemBuffer: null | ItemExemplar;
             exportHUD: null | HUD;
             importHUD: null | HUD;
-            itemBufferExportHudTargetSpecific: null | string;
+            itemBufferExportHudTargetSpecificIn: null | string;
+            itemBufferExportHudTargetSpecificOut: null | string;
         };
         HUDs: Array<HUD>;
         openedHUDs: Array<HUD>;
@@ -38,7 +39,8 @@ const initialState: CoreState = {
             itemBuffer: null,
             exportHUD: null,
             importHUD: null,
-            itemBufferExportHudTargetSpecific: null,
+            itemBufferExportHudTargetSpecificIn: null,
+            itemBufferExportHudTargetSpecificOut: null,
         },
         HUDs: [],
         openedHUDs: [],
@@ -86,8 +88,12 @@ export const coreStateSlice = createSlice({
                 })
             ].specialData = action.payload;
         },
-        setItemBufferExportHudTargetSpecific: (state, action) => {
-            state.interface.HUDDdata.itemBufferExportHudTargetSpecific =
+        setItemBufferExportHudTargetSpecificIn: (state, action) => {
+            state.interface.HUDDdata.itemBufferExportHudTargetSpecificIn =
+                action.payload;
+        },
+        setItemBufferExportHudTargetSpecificOut: (state, action) => {
+            state.interface.HUDDdata.itemBufferExportHudTargetSpecificOut =
                 action.payload;
         },
         setItemBuffer: (state, acton) => {
@@ -113,7 +119,8 @@ export const {
     setItemBuffer,
     setImportHUD,
     setExportHUD,
-    setItemBufferExportHudTargetSpecific,
+    setItemBufferExportHudTargetSpecificIn,
+    setItemBufferExportHudTargetSpecificOut,
 } = coreStateSlice.actions;
 export const coreStateSelector = (state: RootState) => state.coreStateReducer;
 export default coreStateSlice.reducer;

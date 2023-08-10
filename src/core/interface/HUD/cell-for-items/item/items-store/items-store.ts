@@ -43,6 +43,30 @@ export const itemsStore: Array<Item> = [
         height: 2,
         maxStack: 5,
     },
+    {
+        id: 5,
+        name: 'Малый кристалл пространства',
+        mass: 10,
+        width: 1,
+        height: 1,
+        maxStack: 1,
+        specialData: {
+            aElement: 1,
+            bElement: 3
+        }
+    },
+    {
+        id: 6,
+        name: 'Средний кристалл пространства',
+        mass: 10,
+        width: 1,
+        height: 1,
+        maxStack: 1,
+        specialData: {
+            aElement: 1,
+            bElement: 10
+        }
+    },
 ];
 
 export function getTexture(id: number) {

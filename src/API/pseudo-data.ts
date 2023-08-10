@@ -126,6 +126,22 @@ const pseudoData: Array<HUD> = [
                     z: 0,
                     code: codeGenerator(),
                 },
+                {
+                    id: 6,
+                    name: 'Средний кристалл пространства',
+                    mass: 10,
+                    width: 1,
+                    height: 1,
+                    x: 5,
+                    y: 5,
+                    z: 0,
+                    code: codeGenerator(),
+                    maxStack: 1,
+                    specialData: {
+                        aElement: 1,
+                        bElement: 10
+                    }
+                },
             ],
         },
         size: { width: 100, height: 100 },
@@ -148,10 +164,26 @@ const pseudoData: Array<HUD> = [
             maxLimit: 250,
             input: null,
             output: null,
+            fuelSlotsQuality: 100,
+            source: {
+                id: 5,
+                name: 'Малый кристалл пространства',
+                code: codeGenerator(),
+                x: 0,
+                y: 0,
+                z: 0,
+                mass: 10,
+                width: 1,
+                height: 1,
+                maxStack: 1,
+                specialData: {
+                    aElement: 1,
+                    bElement: 2,
+                },
+            },
         },
         size: { width: 100, height: 100 },
     },
-
 ];
 
 export const initData = (data?) => {

@@ -16,6 +16,7 @@ export interface Item {
     durability?: number;
     states?: Array<State>;
     enchantments?: Array<Enchantment>;
+    specialData?: any;
 }
 
 export interface ItemExemplar extends Item {
@@ -73,9 +74,11 @@ export type Foundry = {
     code: number;
     name: string;
     maxLimit: number;
-    input: null | ItemExemplar
-    output: null | ItemExemplar
-}
+    input: null | ItemExemplar;
+    output: null | ItemExemplar;
+    fuelSlotsQuality: number;
+    source?: any;
+};
 
 export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo | Foundry;
 

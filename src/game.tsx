@@ -9,6 +9,8 @@ import { FpsView } from 'react-fps';
 import { useEffect } from 'react';
 import { initData } from './API/pseudo-data';
 
+import './index.css';
+
 function Game() {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
     const dispatch = useAppDispatch();

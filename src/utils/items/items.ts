@@ -58,13 +58,13 @@ class Foundry {
         newExemplarImportHUD.specialData[target] = item;
         dispatch(editBag(newExemplarImportHUD.specialData));
 
-        return true;
+        return newExemplarImportHUD;
     };
 
-    pullOut = ({ exportHUD, item, dispatch, target }) => {
+    pullOut = ({ exportHUD, dispatch, target }) => {
         const newExemplarExportHUD = cloneDeep(exportHUD);
-
         newExemplarExportHUD.specialData[target] = null;
+
         dispatch(editBag(newExemplarExportHUD.specialData));
 
         return true;
