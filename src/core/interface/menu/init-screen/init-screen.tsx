@@ -1,32 +1,35 @@
-import { useCallback, useState } from 'react'
-import { Button } from '@mui/material'
-import * as classNames from 'classnames'
+import { useCallback, useState } from 'react';
+import { Button } from '@mui/material';
+import * as classNames from 'classnames';
 
-import { useAppDispatch } from '../../../../redux/hooks'
-import { playSound } from '../../../audio'
-import { initProcess } from '../../../../redux/HUDReducer'
+import { useAppDispatch } from '../../../../redux/hooks';
+import { playSound, useAudio } from '../../../audio';
+import { initProcess } from '../../../../redux/HUDReducer';
 
-import s from './style.module.scss'
+import s from './style.module.scss';
 
-const F11: number = 122
+const F11: number = 122;
 
 function InitScreen() {
-    const dispatch = useAppDispatch()
-    const [initedProcess, setInitedProcess] = useState(false)
+    const soundInit = useAudio();
+    const dispatch = useAppDispatch();
+    const [initedProcess, setInitedProcess] = useState(false);
     const handleInitGameProcesses = useCallback(() => {
+        const sound = soundInit('3').setVolume(100).looped().play();
         setTimeout(() => {
-            dispatch(initProcess())
-        }, 1000)
-        setInitedProcess(true)
-        playSound(3)
-        playSound(4)
-    }, [])
+            sound.clear();
+            dispatch(initProcess());
+        }, 1000);
+        setInitedProcess(true);
+        playSound(3);
+        playSound(4);
+    }, []);
 
     const handleInitGameProcessOnKeyDown = useCallback((event) => {
         if (event.keyCode === F11) {
-            handleInitGameProcesses()
+            handleInitGameProcesses();
         }
-    }, [])
+    }, []);
 
     return (
         <div
@@ -49,7 +52,7 @@ function InitScreen() {
                 </Button>
             </div>
         </div>
-    )
+    );
 }
 
-export { InitScreen }
+export { InitScreen };

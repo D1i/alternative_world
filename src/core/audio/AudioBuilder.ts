@@ -1,19 +1,32 @@
 import { AppDispatch } from 'src/redux/store';
-// import { clearSound } from '../../redux/HUDReducer'
 import { soundObj } from './utils';
+import { clearSound } from 'src/redux/HUDReducer';
+import { deleteInAudios } from './AudioCore';
 
 class AudioBuilder {
     audio: HTMLAudioElement;
+    audioId: string;
+    volume: number;
     id: string;
+    currentVolume: number;
     dispatch: AppDispatch;
-    constructor(audioId: string, dispatch: AppDispatch) {
+    constructor(
+        audioId: string,
+        dispatch: AppDispatch,
+        volume: number,
+        id: string
+    ) {
         this.audio = new Audio(soundObj[audioId]);
-        this.id = audioId;
+        this.audioId = audioId;
         this.dispatch = dispatch;
+        this.volume = volume;
+        this.currentVolume;
+        this.id = id;
     }
 
     setVolume(value: number) {
-        this.audio.volume = value / 100;
+        this.currentVolume = value;
+        this.audio.volume = (value / 100) * (this.volume / 100);
         return this;
     }
 
@@ -44,16 +57,18 @@ class AudioBuilder {
     clearByEnd() {
         this.audio.onended = () => {
             this.audio.pause();
-            // this.dispatch(clearSound(this.id))
+            this.dispatch(clearSound(this.id));
             this.audio = null;
+            deleteInAudios(this.id);
         };
         return this;
     }
 
     clear() {
         this.audio.pause();
-        // this.dispatch(clearSound(this.id))
+        this.dispatch(clearSound(this.id));
         this.audio = null;
+        deleteInAudios(this.id);
     }
 }
 
