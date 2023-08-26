@@ -1,65 +1,54 @@
-import { useEffect, useState, useCallback } from 'react'
-import { FC } from 'react'
-import s from './Moving.module.scss'
-import { useMoveBtns } from '../hooks'
+import { useEffect, useRef } from 'react';
+import { FC } from 'react';
+import s from './Moving.module.scss';
+import { useMoveBtns } from '../hooks';
+import { KeyVector, PlayerPhysics } from 'src/types/movement';
+import { setPlayerPhysics } from 'src/redux/HUDReducer';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { ObjectTypes } from 'src/types';
+import { getPlayerByMoveKey, getMovedPlayer } from './utils';
 
-import { keyVector, playerTest, mouseTest } from 'src/core/types/movementCore'
-
-import {
-    currentPlayer,
-    currentMouse,
-    setPlayerMove,
-    setPlayerPosition,
-    setMouseMapPosition,
-    setMousePosition,
-} from './utils'
-import { BotRow, MidRow, TopRow } from './components'
-
-interface props {
-    visibilityMode: boolean
+interface Props {
+    visibilityMode: boolean;
 }
 
-const Moving: FC<props> = (props) => {
-    const [player, setPlayer] = useState<playerTest>(currentPlayer)
-    const [mouse, setMouse] = useState<mouseTest>(currentMouse)
-    const moveKeysStack: keyVector = useMoveBtns()
+const Moving: FC<Props> = (props) => {
+    const moveKeysStack: KeyVector = useMoveBtns();
+    const player = useAppSelector(
+        (state) => state.coreStateReducer.player.physics
+    );
+    const { map } = useAppSelector((state) => state.coreStateReducer);
+    const dispatch = useAppDispatch();
+    const mapRef = useRef<ObjectTypes.GameMapObj>(map);
+    const playerRef = useRef<PlayerPhysics>(player);
 
     useEffect(() => {
-        setPlayer((player: playerTest) => setPlayerMove(player, moveKeysStack))
-    }, [moveKeysStack])
+        playerRef.current = player;
+    }, [player]);
+
+    useEffect(() => {
+        mapRef.current = map;
+    }, [map]);
+
+    useEffect(() => {
+        dispatch(setPlayerPhysics(getPlayerByMoveKey(player, moveKeysStack)));
+    }, [moveKeysStack]);
 
     useEffect(() => {
         const timerId = setInterval(() => {
-            setPlayer((player: playerTest) => {
-                setMouse((mouse: mouseTest) =>
-                    setMouseMapPosition(mouse, player)
-                )
-                return setPlayerPosition(player)
-            })
-        }, 10)
+            dispatch(setPlayerPhysics(getMovedPlayer(playerRef, mapRef)));
+        }, 10);
 
-        return () => clearInterval(timerId)
-    }, [])
-
-    const onMouseMoveHeandler = useCallback(
-        (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            setMouse(() => setMousePosition(e, player))
-        },
-        []
-    )
+        return () => clearInterval(timerId);
+    }, []);
 
     return (
         <div
+            tabIndex={0}
             style={{ display: props.visibilityMode ? 'flex' : 'none' }}
-            onMouseMove={(e) => onMouseMoveHeandler(e)}
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
             className={s.movingCore}
-        >
-            <TopRow player={player} />
-            <MidRow player={player} mouse={mouse} />
-            <BotRow player={player} />
-        </div>
-    )
-}
+        ></div>
+    );
+};
 
-export { Moving }
+export { Moving };

@@ -1,5 +1,5 @@
-import { keyVector } from 'src/core/types/movementCore'
+import { KeyVector } from 'src/types/movement';
 
-const moveKeys: keyVector = ['KeyW', 'KeyA', 'KeyS', 'KeyD']
+const moveKeys: KeyVector = ['KeyW', 'KeyA', 'KeyS', 'KeyD'];
 
-export { moveKeys }
+export { moveKeys };

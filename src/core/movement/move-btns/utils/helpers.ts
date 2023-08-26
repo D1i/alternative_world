@@ -1,6 +1,6 @@
-import { keyVector } from 'src/core/types/movementCore';
+import { KeyVector } from 'src/types/movement';
 
-export function showVector(codes: keyVector) {
+export function showVector(codes: KeyVector) {
     if (codes[0] === 'KeyW') {
         if (codes[1] === 'KeyA') {
             if (codes[2] === 'KeyD') {

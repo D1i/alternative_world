@@ -8,6 +8,8 @@ import { MovementCore } from './core/movement';
 import { FpsView } from 'react-fps';
 import { useEffect } from 'react';
 import { initData } from './API/pseudo-data';
+import { ObjectCore } from './core/object';
+import { GraphicsCore } from './core/graphics';
 
 function Game() {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
@@ -30,6 +32,8 @@ function Game() {
             )}
             <InterfaceCore />
             <FpsView left={window.innerWidth - 200} width={200} />
+            <ObjectCore />
+            <GraphicsCore />
         </div>
     );
 }

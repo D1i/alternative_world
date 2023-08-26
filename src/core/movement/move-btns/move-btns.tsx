@@ -1,24 +1,24 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { createContext, useState } from 'react'
-import { moveKeys } from './utils'
-import { keyVector } from 'src/core/types/movementCore'
+import { createContext, useState } from 'react';
+import { moveKeys } from './utils';
+import { KeyVector } from 'src/types/movement';
 
-const MoveContext = createContext<keyVector>([])
+const MoveContext = createContext<KeyVector>([]);
 
 interface props {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 const MoveBtns: FC<props> = (props) => {
-    const [moveKeysStack, setMoveKeysStack] = useState<keyVector>([])
+    const [moveKeysStack, setMoveKeysStack] = useState<KeyVector>([]);
 
     function handleMoveKeyDown(event) {
         if (
             !moveKeysStack.includes(event.code) &&
             moveKeys.includes(event.code)
         ) {
-            setMoveKeysStack([...moveKeysStack, event.code])
+            setMoveKeysStack([...moveKeysStack, event.code]);
         }
     }
 
@@ -26,7 +26,7 @@ const MoveBtns: FC<props> = (props) => {
         if (moveKeys.includes(event.code)) {
             setMoveKeysStack([
                 ...moveKeysStack.filter((key) => key !== event.code),
-            ])
+            ]);
         }
     }
 
@@ -44,7 +44,7 @@ const MoveBtns: FC<props> = (props) => {
                 {props.children}
             </MoveContext.Provider>
         </div>
-    )
-}
+    );
+};
 
-export { MoveContext, MoveBtns }
+export { MoveContext, MoveBtns };

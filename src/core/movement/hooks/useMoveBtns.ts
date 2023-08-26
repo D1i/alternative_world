@@ -1,10 +1,10 @@
-import { useContext } from 'react'
-import { MoveContext } from '../move-btns'
-import { keyVector } from 'src/core/types/movementCore'
+import { useContext } from 'react';
+import { MoveContext } from '../move-btns';
+import { KeyVector } from 'src/types/movement';
 
 const useMoveBtns = () => {
-    const moveKeysStack: keyVector = useContext(MoveContext)
-    return moveKeysStack
-}
+    const moveKeysStack: KeyVector = useContext(MoveContext);
+    return moveKeysStack;
+};
 
-export { useMoveBtns }
+export { useMoveBtns };
