@@ -1,11 +1,7 @@
 import { codeGenerator } from '../utils/code-generator';
-import { HUDTypes } from '../types';
-import { HUD, Types } from '../types/HUD';
-import utils from '../utils';
+import { HUDTypes, PlayerTypes } from '../types';
+import { HUD, Size, Types } from '../types/HUD';
 import { HUDBuilder } from '../core/interface/HUD/HUD-utils';
-import { useAppDispatch } from '../redux/hooks';
-import { addHUD } from '../redux/HUDReducer';
-import { Item } from '../core/interface/HUD/cell-for-items/item/item';
 
 const pseudoData: Array<HUD> = [
     {
@@ -139,8 +135,8 @@ const pseudoData: Array<HUD> = [
                     maxStack: 1,
                     specialData: {
                         aElement: 1,
-                        bElement: 10
-                    }
+                        bElement: 10,
+                    },
                 },
             ],
         },
@@ -179,6 +175,53 @@ const pseudoData: Array<HUD> = [
                 specialData: {
                     aElement: 1,
                     bElement: 2,
+                },
+            },
+        },
+        size: { width: 100, height: 100 },
+    },
+    {
+        type: Types.PLAYER_AMMUNITION,
+        id: 124124,
+        name: 'test',
+        code: codeGenerator(),
+        hasShifting: false,
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0,
+        specialData: {
+            id: 412512515,
+            code: codeGenerator(),
+            name: 'test-SD',
+            ammunition: {
+                name: 'Saya',
+                visualParams: undefined,
+                characteristics: undefined,
+                effects: undefined,
+                state: undefined,
+                ammunition: {
+                    head: {},
+                    neck: {},
+                    leftShoulder: {},
+                    rightShoulder: {},
+                    leftForearm: {},
+                    rightForearm: {},
+                    stomach: {},
+                    legs: {},
+                    feet: {},
+                    leftHand: null,
+                    rightHand: null,
+                    back: undefined,
+                    Breast: undefined,
+                    leftForearmUp: undefined,
+                    rightForearmUp: undefined,
+                    leftForearmDown: undefined,
+                    rightForearmDown: undefined,
+                    leftLegUp: undefined,
+                    rightLegUp: undefined,
+                    leftLegDown: undefined,
+                    rightLegDown: undefined,
                 },
             },
         },

@@ -1,3 +1,5 @@
+import { PlayerTypes } from 'src/types';
+
 export type State = {
     todo: string;
 };
@@ -55,6 +57,7 @@ export enum Types {
     ADMIN_PANEL = 'ADMIN_PANEL',
     DEV_INFO = 'DEV_INFO',
     FOUNDRY = 'FOUNDRY',
+    PLAYER_AMMUNITION = 'PLAYER_AMMUNITION',
 }
 
 export type DevInfo = {
@@ -80,7 +83,14 @@ export type Foundry = {
     source?: any;
 };
 
-export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo | Foundry;
+export type PlayerAmunition = {
+    id: number;
+    code: number;
+    name: string;
+    ammunition: PlayerTypes.Player;
+};
+
+export type HUDSpecialData = Bag | Profile | AdminPanel | DevInfo | Foundry | PlayerAmunition;
 
 export type HUD = {
     id: number;

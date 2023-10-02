@@ -3,6 +3,9 @@ import { CSSProperties, useCallback, useMemo, useState } from 'react';
 import { ContextDescription } from './context-description';
 
 import s from './slot.module.scss';
+import { CellForItems } from '../../cell-for-items';
+import { Bag, HUD, ItemExemplar } from '../../../../../types/HUD';
+import { isNull } from 'lodash';
 
 export enum Format {
     SMALL = 'SMALL',
@@ -15,13 +18,20 @@ type PropsTypes = {
     canBeEquipped: Array<string>;
     position: { x: number; y: number };
     format: Format;
+    data: HUD;
+    path: string;
 };
 
 export function Slot(props: PropsTypes) {
     const [showDescription, setShowDescription] = useState<boolean>(false);
 
     const description = useMemo(() => {
-        return <ContextDescription canBeEquipped={props.canBeEquipped} name={props.name} />;
+        return (
+            <ContextDescription
+                canBeEquipped={props.canBeEquipped}
+                name={props.name}
+            />
+        );
     }, [props.canBeEquipped]);
 
     const style: CSSProperties = useMemo(() => {
@@ -51,6 +61,29 @@ export function Slot(props: PropsTypes) {
         setShowDescription(false);
     }, []);
 
+    const data: Bag = useMemo(() => {
+        const path = props.path.split('/');
+        if (!path) {
+            return null;
+        }
+        const item = path.reduce((prevValue, pathCell) => {
+            if (!prevValue || prevValue[pathCell]) {
+                return null;
+            }
+            return prevValue[pathCell];
+        }, props.data);
+
+        return {
+            ...props.data.specialData,
+            x: 1,
+            y: 1,
+            name: props.name,
+            maxLimit: 10,
+            mass: 250,
+            inner: item ? [item] : [],
+        };
+    }, [props.data]);
+
     return (
         <div
             onMouseEnter={handleEnter}
@@ -58,6 +91,7 @@ export function Slot(props: PropsTypes) {
             style={style}
             className={s.container}
         >
+            <CellForItems data={data} infinityCell />
             {showDescription && description}
         </div>
     );

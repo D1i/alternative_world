@@ -17,8 +17,8 @@ import {
     setExportHUD,
     setImportHUD,
     setItemBuffer,
-    setItemBufferExportHudTargetSpecificIn,
-    setItemBufferExportHudTargetSpecificOut,
+    setItemBufferExportHudPathSpecificIn,
+    setItemBufferExportHudPathSpecificOut,
 } from 'src/redux/HUDReducer';
 
 import utils from 'src/utils';
@@ -91,12 +91,12 @@ function CellForItems(props: PropsType) {
 
     const handleSetImportHUDIn = useCallback(() => {
         dispatch(setExportHUD(findHUDParrentBag(props.data)));
-        dispatch(setItemBufferExportHudTargetSpecificIn(props.target));
+        dispatch(setItemBufferExportHudPathSpecificIn(props.target));
     }, [props.data, dispatch, setImportHUD, findHUDParrentBag]);
 
     const handleSetImportHUDOut = useCallback(() => {
         dispatch(setExportHUD(findHUDParrentBag(props.data)));
-        dispatch(setItemBufferExportHudTargetSpecificOut(props.target));
+        dispatch(setItemBufferExportHudPathSpecificOut(props.target));
     }, [props.data, dispatch, setImportHUD, findHUDParrentBag]);
 
     const handleItemDropMatrixCell = useCallback(

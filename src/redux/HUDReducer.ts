@@ -88,11 +88,11 @@ export const coreStateSlice = createSlice({
                 })
             ].specialData = action.payload;
         },
-        setItemBufferExportHudTargetSpecificIn: (state, action) => {
+        setItemBufferExportHudPathSpecificIn: (state, action) => {
             state.interface.HUDDdata.itemBufferExportHudTargetSpecificIn =
                 action.payload;
         },
-        setItemBufferExportHudTargetSpecificOut: (state, action) => {
+        setItemBufferExportHudPathSpecificOut: (state, action) => {
             state.interface.HUDDdata.itemBufferExportHudTargetSpecificOut =
                 action.payload;
         },
@@ -119,8 +119,8 @@ export const {
     setItemBuffer,
     setImportHUD,
     setExportHUD,
-    setItemBufferExportHudTargetSpecificIn,
-    setItemBufferExportHudTargetSpecificOut,
+    setItemBufferExportHudPathSpecificIn,
+    setItemBufferExportHudPathSpecificOut,
 } = coreStateSlice.actions;
 export const coreStateSelector = (state: RootState) => state.coreStateReducer;
 export default coreStateSlice.reducer;
