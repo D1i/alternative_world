@@ -22,6 +22,7 @@ interface playerTest {
     ySpeedChunkPerSecond: number
     xPositionChunk: number
     yPositionChunk: number
+    id: number
 }
 
 interface mouseTest {
