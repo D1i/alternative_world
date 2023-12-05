@@ -1,1 +1,0 @@
-export { Moving } from './Moving'

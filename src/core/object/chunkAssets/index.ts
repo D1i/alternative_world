@@ -1,0 +1,1 @@
+export { chunkAssets } from './chunkAssets';

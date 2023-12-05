@@ -8,6 +8,8 @@ import { MovementCore } from './core/movement';
 import { FpsView } from 'react-fps';
 import { useEffect } from 'react';
 import { initData } from './API/pseudo-data';
+import { GraphicCore } from './core/graphic';
+import { ObjectCore } from './core/object';
 
 function Game() {
     const selectedCoreStateSelector = useAppSelector(coreStateSelector);
@@ -25,9 +27,10 @@ function Game() {
             {!selectedCoreStateSelector.interface.initedProcess && (
                 <InitScreen />
             )}
-            {!selectedCoreStateSelector.interface.menu.main && (
-                <MovementCore visibilityMode />
-            )}
+            {!selectedCoreStateSelector.interface.menu.main && <MovementCore />}
+            <ObjectCore />
+            <GraphicCore />
+
             <InterfaceCore />
             <FpsView left={window.innerWidth - 200} width={200} />
         </div>

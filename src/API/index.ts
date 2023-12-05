@@ -1,0 +1,1 @@
+export { physicPlayers } from './physicPlayers';

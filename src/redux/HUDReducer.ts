@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
-import { HUDTypes } from 'src/types';
+import { GameMapTypes, HUDTypes, PhysicPlayerTypes } from 'src/types';
 import { Bag, HUD } from '../types/HUD';
+
+export interface ObjectState {
+    map: GameMapTypes.GameMap | null;
+    physicPlayers: Array<PhysicPlayerTypes.PhysicPlayer>;
+    currentPlayer: number | null;
+}
 
 export interface CoreState {
     interface: {
@@ -16,6 +22,7 @@ export interface CoreState {
     settings: {
         volme: number;
     };
+    objects: ObjectState;
 }
 
 const initialState: CoreState = {
@@ -29,6 +36,11 @@ const initialState: CoreState = {
     },
     settings: {
         volme: 100,
+    },
+    objects: {
+        map: null,
+        physicPlayers: [],
+        currentPlayer: null,
     },
 };
 
@@ -54,7 +66,7 @@ export const coreStateSlice = createSlice({
         setVolme: (state, action) => {
             state.settings.volme = action.payload;
         },
-        addHUD: (state, action: {payload: HUD, type: string}) => {
+        addHUD: (state, action: { payload: HUD; type: string }) => {
             state.interface.HUDs.push(action.payload);
         },
         initProcess: (state) => {
@@ -69,6 +81,30 @@ export const coreStateSlice = createSlice({
                 )
             ].specialData = action.payload;
         },
+        setMap: (state: CoreState, action) => {
+            const payload: GameMapTypes.GameMap = action.payload;
+            state.objects.map = payload;
+        },
+        setPhysicPlayers: (state: CoreState, action) => {
+            const payload: Array<PhysicPlayerTypes.PhysicPlayer> =
+                action.payload;
+            state.objects.physicPlayers = payload;
+        },
+        setPhysicPlayer: (state: CoreState, action) => {
+            interface Payload {
+                index: number;
+                data: PhysicPlayerTypes.PhysicPlayer;
+            }
+
+            const payload: Payload = action.payload;
+            const { index, data } = payload;
+
+            state.objects.physicPlayers[index] = data;
+        },
+        setCurrentPlayer: (state: CoreState, action) => {
+            const payload: number = action.payload;
+            state.objects.currentPlayer = payload;
+        },
     },
 });
 export const {
@@ -80,6 +116,10 @@ export const {
     initProcess,
     addHUD,
     editBag,
+    setMap,
+    setPhysicPlayers,
+    setPhysicPlayer,
+    setCurrentPlayer,
 } = coreStateSlice.actions;
 export const coreStateSelector = (state: RootState) => state.coreStateReducer;
 export default coreStateSlice.reducer;

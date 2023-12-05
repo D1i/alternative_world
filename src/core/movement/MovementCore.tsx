@@ -1,16 +1,17 @@
-import { Moving } from './Moving'
-import { MoveBtns } from './move-btns'
+import { Move } from './Move';
+import { MoveBtns } from './move-btns';
 
 interface props {
-    visibilityMode?: boolean
+    visibilityMode?: boolean;
 }
 
 function MovementCore(props: props) {
     return (
         <MoveBtns>
-            <Moving visibilityMode={props.visibilityMode} />
+            <Move />
+            {/* <Moving visibilityMode={props.visibilityMode} /> */}
         </MoveBtns>
-    )
+    );
 }
 
-export { MovementCore }
+export { MovementCore };
